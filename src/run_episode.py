@@ -19,7 +19,7 @@ STATE = ROOT / "state" / "done.json"
 
 def resolve_episode(arg):
     """Accept a path, or just an episode number/slug such as 1, 001 or four-stroke-engine."""
-    for cand in (Path(arg), ROOT / arg):
+    for cand in (Path(arg), ROOT / arg, ROOT / "episodes" / arg, ROOT / "episodes" / f"{arg}.yml"):
         if cand.is_file():
             return cand
     files = sorted((ROOT / "episodes").glob("*.yml"))
