@@ -17,6 +17,23 @@ from .build_video import build
 STATE = ROOT / "state" / "done.json"
 
 
+def resolve_episode(arg):
+    """Accept a path, or just an episode number/slug such as 1, 001 or four-stroke-engine."""
+    for cand in (Path(arg), ROOT / arg):
+        if cand.is_file():
+            return cand
+    files = sorted((ROOT / "episodes").glob("*.yml"))
+    key = arg.split(":")[0].strip().lower()
+    for f in files:
+        ep = load_yaml(f)
+        if (key.isdigit() and str(ep.get("id", "")).isdigit() and int(ep["id"]) == int(key)) \
+                or key in (str(ep.get("id", "")).lower(), str(ep.get("slug", "")).lower()):
+            return f
+    names = ", ".join(f.name for f in files) or "none"
+    raise SystemExit(f"Episode '{arg}' not found. Use a path like episodes/001-four-stroke-engine.yml "
+                     f"or an episode number. Available: {names}")
+
+
 def done_ids():
     return set(json.loads(STATE.read_text())) if STATE.exists() else set()
 
@@ -31,7 +48,7 @@ def main():
     ap.add_argument("--force", action="store_true", help="skip the approval checks (testing only)")
     a = ap.parse_args()
 
-    ep = load_yaml(a.episode)
+    ep = load_yaml(resolve_episode(a.episode))
     brand = load_brand()
 
     if not a.force:

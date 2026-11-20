@@ -11,6 +11,10 @@ on:
         description: "Upload to YouTube as PRIVATE after building"
         type: boolean
         default: false
+      test_mode:
+        description: "Test build: skip the approved/sources checks. Never uploads."
+        type: boolean
+        default: false
   schedule:
     - cron: "30 3 * * 1,3,5"   # Mon/Wed/Fri 03:30 UTC = 09:00 IST. Builds only if an episode is 'approved'.
 
@@ -82,7 +86,9 @@ jobs:
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
         run: |
           FLAGS=""
-          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.upload }}" = "true" ]; then
+          if [ "${{ github.event.inputs.test_mode }}" = "true" ]; then
+            FLAGS="--force"          # test builds never upload
+          elif [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.upload }}" = "true" ]; then
             FLAGS="--upload"
           fi
           python -m src.run_episode "${{ steps.pick.outputs.episode }}" --tts piper $FLAGS
