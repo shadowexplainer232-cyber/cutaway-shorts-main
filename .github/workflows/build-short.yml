@@ -1,0 +1,108 @@
+name: Build Cutaway Short
+
+on:
+  workflow_dispatch:
+    inputs:
+      episode:
+        description: "Episode file (e.g. episodes/001-four-stroke-engine.yml). Empty = next approved episode."
+        required: false
+        default: ""
+      upload:
+        description: "Upload to YouTube as PRIVATE after building"
+        type: boolean
+        default: false
+  schedule:
+    - cron: "30 3 * * 1,3,5"   # Mon/Wed/Fri 03:30 UTC = 09:00 IST. Builds only if an episode is 'approved'.
+
+permissions:
+  contents: write   # lets the job record uploaded episode ids in state/done.json
+
+concurrency:
+  group: cutaway-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180   # first run renders the 3D frames; later runs reuse the cache
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: System packages (ffmpeg, fonts)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-montserrat
+
+      - name: Python packages
+        run: pip install -r requirements.txt
+
+      - name: Install Blender (3D engine; skipped silently if the download fails)
+        continue-on-error: true
+        run: |
+          sudo apt-get install -y libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libsm6 libxkbcommon0 xz-utils
+          mkdir -p "$HOME/blender" && cd "$HOME/blender"
+          curl -fsSL -o blender.tar.xz https://download.blender.org/release/Blender4.2/blender-4.2.3-linux-x64.tar.xz
+          tar -xf blender.tar.xz --strip-components=1
+          echo "BLENDER=$HOME/blender/blender" >> "$GITHUB_ENV"
+
+      - name: Cache 3D engine frames
+        uses: actions/cache@v4
+        with:
+          path: assets/engine3d
+          key: engine3d-${{ hashFiles('blender/engine_cycle.py', 'config/brand.yml') }}
+
+      - name: Render 3D engine (falls back to the 2D animation on any failure)
+        continue-on-error: true
+        run: python -m src.render_3d
+
+      - name: Cache Piper voices
+        uses: actions/cache@v4
+        with:
+          path: voices
+          key: piper-voices-${{ hashFiles('config/brand.yml') }}
+
+      - name: Choose episode
+        id: pick
+        run: |
+          EP="${{ github.event.inputs.episode }}"
+          if [ -z "$EP" ]; then EP="$(python -m src.pick_next)"; fi
+          echo "episode=$EP" >> "$GITHUB_OUTPUT"
+          if [ -z "$EP" ]; then echo "No approved episode waiting. Nothing to build."; fi
+
+      - name: Build video (and private upload if requested or scheduled)
+        if: steps.pick.outputs.episode != ''
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          FLAGS=""
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.upload }}" = "true" ]; then
+            FLAGS="--upload"
+          fi
+          python -m src.run_episode "${{ steps.pick.outputs.episode }}" --tts piper $FLAGS
+
+      - name: Keep the MP4 and narration MP3 as a downloadable artifact
+        if: steps.pick.outputs.episode != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: cutaway-episode
+          path: |
+            out/**/*.mp4
+            out/**/narration.mp3
+          retention-days: 14
+
+      - name: Record uploaded episode
+        if: steps.pick.outputs.episode != ''
+        run: |
+          if git diff --quiet state/done.json; then exit 0; fi
+          git config user.name "cutaway-bot"
+          git config user.email "cutaway-bot@users.noreply.github.com"
+          git add state/done.json
+          git commit -m "Record uploaded episode"
+          git push

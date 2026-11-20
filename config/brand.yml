@@ -1,0 +1,41 @@
+# Cutaway brand settings. PROPOSED values: change only after you approve the branding.
+channel_name: Cutaway
+tagline: "Understand how the world works."
+
+colors:
+  bg: "#0B1426"      # deep navy
+  accent: "#FFB400"  # warm amber
+  tech: "#2EC4F1"    # cyan
+  text: "#F4F6F8"    # off-white
+  muted: "#5B6B85"
+
+video:
+  width: 1080
+  height: 1920
+  fps: 30
+  pad_after_scene_sec: 0.25   # silence added after each narrated scene
+
+# Piper voice. Check the voice's own licence/model card before monetising (see voices/VOICES.md).
+voice:
+  name: en_US-ryan-high
+  length_scale: 1.0   # >1.0 = slower speech, <1.0 = faster
+  data_dir: voices
+  effect: none        # none | robot  (robot = mechanical voice filter; test it on real speech first)
+
+sfx:
+  enabled: true
+  volume: 0.5         # effects loudness relative to the voice
+  hum_volume: 0.06    # quiet engine idle under the whole video
+
+# Optional 3D engine rendered with Blender on the GitHub runner. If Blender is missing or this is
+# false, the pipeline uses the built-in 2D animation instead.
+blender:
+  enabled: true
+  frames: 180         # frames for one full 720-degree cycle
+  samples: 24         # Cycles samples (more = cleaner and slower)
+  engine: CYCLES
+
+music:
+  # Put licensed tracks in assets/music/ and list the file here. Leave empty for no music.
+  file: ""
+  volume: 0.08

@@ -1,0 +1,27 @@
+CUTAWAY - EPISODE 001 - NARRATION RECORDING SHEET
+
+Make ONE audio clip per scene (mp3, wav or m4a). Name each clip with its number:
+01.mp3, 02.mp3 ... 07.mp3. Speak clearly, confident and natural, a little energetic.
+Leave about half a second of silence at the start and end of each clip. Keep each clip to the length of its text (about 3-9 seconds).
+Free text-to-speech websites or your phone's voice recorder both work. Check the tool's licence allows YouTube use.
+
+--- 01.mp3  (hook) ---
+Three out of every four strokes in your engine make no power at all. So how does it keep running?
+
+--- 02.mp3  (intake) ---
+First, intake. The piston moves down and the intake valve opens, pulling air and fuel into the cylinder.
+
+--- 03.mp3  (compression) ---
+Second, compression. Both valves close, and the piston rises, squeezing the mixture.
+
+--- 04.mp3  (power) ---
+Third, power. The spark plug ignites the mixture, and the expanding gas shoves the piston down.
+
+--- 05.mp3  (exhaust) ---
+Fourth, exhaust. The exhaust valve opens, and the rising piston pushes the burnt gas out.
+
+--- 06.mp3  (answer) ---
+That is two full turns of the crankshaft per power stroke. The flywheel and the other cylinders carry the engine through the rest.
+
+--- 07.mp3  (outro) ---
+This is Cutaway. Understand how the world works. Follow for the next machine.

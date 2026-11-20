@@ -1,0 +1,76 @@
+# One file per Short. status: draft -> approved (you set this) -> the pipeline builds it.
+id: "001"
+slug: four-stroke-engine
+status: draft            # change to "approved" when you are happy with the script
+category: How Machines Work
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false   # procedural diagrams, no realistic AI footage
+
+titles:
+  - How a Four-Stroke Engine Actually Works
+  - 4 Strokes, 1 Power Stroke: Inside Your Car Engine
+  - Why Your Engine Only Makes Power 1 Time in 4
+upload_title_index: 0
+
+description: |
+  Three of the four strokes in a petrol engine make no power. Here is the whole cycle,
+  and what keeps the engine turning, in under a minute.
+
+  The animation is simplified: real valve timing overlaps the strokes slightly.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#engineering", "#howitworks", "#engine", "#mechanicalengineering"]
+tags: [four stroke engine, how engines work, piston engine, engine explained, mechanical engineering]
+pinned_comment: "Which machine should we open up next? Tell us below."
+cover_frame_concept: "Cylinder at the instant of ignition, amber flash, big text: 3 OF 4 MAKE NO POWER"
+
+sources_status: UNVERIFIED   # must become VERIFIED before status: approved
+sources:
+  - "TO CHECK: university or textbook reference for the Otto cycle (720 degrees of crank rotation per cycle)"
+  - "TO CHECK: manufacturer or SAE reference confirming one power stroke per cylinder per two revolutions"
+  - "TO CHECK: source stating the other three strokes consume work supplied by the flywheel and other cylinders"
+
+# Estimated narration: about 45-50 seconds at normal pace (check the build log).
+next_up: "How a Jet Engine Works"   # planned, not yet produced
+scenes:
+  - id: hook
+    on_screen: "3 OF 4 STROKES MAKE NO POWER"
+    text: "Three out of every four strokes in your engine make no power at all. So how does it keep running?"
+    visual: {type: four_stroke, phase: all}
+    sfx: [{name: whoosh, at: 0.0}, {name: thump, at: 3.2, gain: 0.6}]
+
+  - id: intake
+    on_screen: "1 · INTAKE"
+    text: "First, intake. The piston moves down and the intake valve opens, pulling air and fuel into the cylinder."
+    visual: {type: four_stroke, phase: intake}
+    sfx: [{name: valve_click, at: 0.15}, {name: intake_whoosh, at: 0.3}]
+
+  - id: compression
+    on_screen: "2 · COMPRESSION"
+    text: "Second, compression. Both valves close, and the piston rises, squeezing the mixture."
+    visual: {type: four_stroke, phase: compression}
+    sfx: [{name: valve_click, at: 0.1}, {name: compress, at: 1.2}]
+
+  - id: power
+    on_screen: "3 · POWER"
+    text: "Third, power. The spark plug ignites the mixture, and the expanding gas shoves the piston down."
+    visual: {type: four_stroke, phase: power}
+    sfx: [{name: spark_zap, at: 1.6}, {name: thump, at: 1.65}]
+
+  - id: exhaust
+    on_screen: "4 · EXHAUST"
+    text: "Fourth, exhaust. The exhaust valve opens, and the rising piston pushes the burnt gas out."
+    visual: {type: four_stroke, phase: exhaust}
+    sfx: [{name: valve_click, at: 0.1}, {name: exhaust_puff, at: 0.3}]
+
+  - id: answer
+    on_screen: "2 TURNS · 1 POWER"
+    text: "That is two full turns of the crankshaft per power stroke. The flywheel and the other cylinders carry the engine through the rest."
+    visual: {type: four_stroke, phase: all}
+    sfx: [{name: whoosh, at: 0.0}]
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]

@@ -1,0 +1,7 @@
+out/
+assets/engine3d/
+voices/*.onnx
+voices/*.json
+__pycache__/
+*.pyc
+client_secret*.json
