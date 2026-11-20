@@ -54,8 +54,8 @@ jobs:
           tar -xf blender.tar.xz --strip-components=1
           echo "BLENDER=$HOME/blender/blender" >> "$GITHUB_ENV"
 
-      - name: Cache 3D engine frames
-        uses: actions/cache@v4
+      - name: Restore cached 3D engine frames
+        uses: actions/cache/restore@v4
         with:
           path: assets/engine3d
           key: engine3d-${{ hashFiles('blender/engine_cycle.py', 'config/brand.yml') }}
@@ -63,6 +63,13 @@ jobs:
       - name: Render 3D engine (falls back to the 2D animation on any failure)
         continue-on-error: true
         run: python -m src.render_3d
+
+      - name: Save 3D engine frames (only when the render completed; kept even if a later step fails)
+        if: always() && hashFiles('assets/engine3d/meta.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: assets/engine3d
+          key: engine3d-${{ hashFiles('blender/engine_cycle.py', 'config/brand.yml') }}
 
       - name: Cache Piper voices
         uses: actions/cache@v4
