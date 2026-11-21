@@ -36,7 +36,7 @@ sources:
   - "Haynes, superchargers vs turbochargers: a supercharger is belt-driven from the crank; a turbo is 'propelled by the exhaust gasses'. https://haynes.com/en-au/tips-tutorials/superchargers-and-turbochargers-what-s-difference"
   - "Episode 003 sources (turbo basics): UTI, CarAdvice, Explain that Stuff."
 
-next_up: "How a Jet Engine Starts"   # planned, not yet produced
+next_up: "How a Manual Gearbox Works"   # episode 005
 
 # Estimated narration: about 55 seconds at the slower pace. Check the build log; if over 59 s, trim the bonus scene.
 scenes:

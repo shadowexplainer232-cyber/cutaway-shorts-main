@@ -1,0 +1,108 @@
+# Episode 005. status: draft -> approved (you set this) -> the scheduled job builds it.
+# To try it now without approving: run the workflow with episode "005" and tick test_mode.
+id: "005"
+slug: manual-gearbox
+status: draft
+category: How Machines Work
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false   # procedural diagrams, no realistic AI footage
+
+# Chosen by the channel owner. Car-relatable topic (turbo episode 003 performed best; jet episode 002 least).
+# Includes the clutch, and what the wrong gear does to the engine.
+# Ending format: lesson -> bonus fact -> viewer question -> calm beat -> channel.
+titles:
+  - Why Your Car Needs Gears (and What the Wrong One Does)
+  - How a Manual Gearbox Really Works
+  - What Happens to Your Engine in the Wrong Gear?
+upload_title_index: 0
+
+description: |
+  Why does a car need gears at all? An engine works best in a narrow speed range, and gears keep it
+  there. In under a minute: what low and high gear do, what the clutch is for, and what happens to
+  the engine in the wrong gear.
+
+  The animation is simplified and not to scale.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#manualtransmission", "#cars", "#engineering", "#howitworks"]
+tags: [how a manual gearbox works, what does a clutch do, why cars need gears, engine lugging, gear ratios, manual vs automatic]
+pinned_comment: "Manual or automatic: which do you drive? Tell us below."
+cover_frame_concept: "Two meshing 3D gears over a rev gauge. Big text: WRONG GEAR, WHAT BREAKS?"
+
+# Claims checked against the pages below (read on 2026-11-21). No rpm or power figures used.
+sources_status: VERIFIED
+sources:
+  - "HowStuffWorks, transmission: 'Cars need transmissions because of the physics of the gasoline engine'; engines have 'narrow rpm ranges where horsepower and torque are at their maximum'; 'You shift gears so the engine can stay below the redline and near the rpm band of its best performance'; the clutch 'lets you connect and disconnect the engine and the transmission'. https://www.howstuffworks.com/transmission.htm"
+  - "Hagerty, how a manual transmission works: the transmission 'functions as a trade-off between wheel torque and wheel speed'; 'Lower gears provide high levels of torque multiplication needed to get the vehicle moving'; 'higher gears offer greater top speed capability'. https://www.hagerty.com/media/?p=8257"
+  - "YourMechanic, how a manual transmission works: pressing the clutch pedal disengages the clutch so the driver can shift; engaged, 'the pressure plate pushes the clutch plate against the flywheel, locking the engine to the transmission'; shifting up reduces RPMs. (The page wrongly calls a manual a CVT; that claim is NOT used.) https://www.yourmechanic.com/article/how-a-manual-transmission-works"
+  - "SlashGear, lugging: 'Lugging occurs when you push the throttle hard while the transmission is in high gear'; persistent lugging 'will disrupt the timing and cause it to run hotter than it should' and can cause 'piston and spark plug damage via low-speed pre-ignition'; an experienced driver downshifts. https://www.slashgear.com/1896138/lugging-engine-meaning-explained/"
+  - "Hagerty, gear ratios and feel: the 2020 Mustang has 'an additional 25 hp and 20 lb-feet of torque' than the 2015, yet its more linear gear ratios make it 'feel slower across the board'. https://hagerty.com/media/?p=8839"
+  - "NOTE: 'can be damaged' in the lug scene is softened from SlashGear's specific claims; the on-screen gauge positions are illustrative, not measured."
+
+next_up: "Why Does a Turbo Whistle?"   # planned, not yet produced
+
+# Estimated narration: about 50 seconds at the slower pace. Check the build log.
+scenes:
+  - id: hook
+    on_screen: "WHY DOES A CAR NEED GEARS?"
+    text: "Why does a car need gears? And what happens to the engine in the wrong one?"
+    visual: {type: gearbox, stage: engine, callout: "WRONG GEAR, WHAT BREAKS?"}
+    sfx: [{name: whoosh, at: 0.2}]
+
+  - id: range
+    on_screen: "ENGINES HAVE A SWEET SPOT"
+    text: "An engine works best in a narrow speed range. Gears keep it there."
+    visual: {type: gearbox, stage: engine, callout: "GEARS KEEP THE ENGINE IN ITS BEST RANGE"}
+    sfx: [{name: valve_click, at: 0.4}]
+
+  - id: low
+    on_screen: "1 · LOW GEAR"
+    text: "Low gear multiplies torque to get moving, but limits speed."
+    visual: {type: gearbox, stage: low, callout: "LOW GEAR: PUSH, NOT SPEED"}
+    sfx: [{name: thump, at: 0.3, gain: 0.5}]
+
+  - id: high
+    on_screen: "2 · HIGH GEAR"
+    text: "High gear gives top speed, and the engine turns slower."
+    visual: {type: gearbox, stage: high, callout: "HIGH GEAR: SPEED, NOT PUSH"}
+    sfx: [{name: whoosh, at: 0.3}]
+
+  - id: clutch
+    on_screen: "3 · THE CLUTCH"
+    text: "To change gear, the clutch disconnects the engine from the gearbox."
+    visual: {type: gearbox, stage: clutch, callout: "THE CLUTCH CONNECTS AND DISCONNECTS"}
+    sfx: [{name: valve_click, at: 1.3}, {name: valve_click, at: 3.8}]
+
+  - id: lug
+    on_screen: "THE WRONG GEAR: LUGGING"
+    text: "Too high a gear and the engine lugs. It works harder, runs hotter, and can be damaged. Downshift."
+    visual: {type: gearbox, stage: lug, callout: "TOO HIGH A GEAR HURTS THE ENGINE"}
+    sfx: [{name: thump, at: 0.4, gain: 0.6}, {name: shimmer, at: 3.4, gain: 0.5}]
+
+  - id: bonus
+    on_screen: ""
+    text: "In one comparison, a Mustang with more power felt slower, thanks to its gear ratios."
+    visual:
+      type: fact_card
+      label: "ONE MORE THING"
+      lines: ["MORE POWER", "BUT FELT SLOWER", "BECAUSE OF ITS GEARS"]
+      colors: [accent, text, tech]
+      sub: "Mustang 2015 vs 2020 (Hagerty)"
+    sfx: [{name: ding, at: 0.3, gain: 0.5}]
+
+  - id: question
+    on_screen: ""
+    text: "Manual or automatic? Tell us in the comments."
+    visual:
+      type: fact_card
+      label: "YOUR TURN"
+      lines: ["MANUAL", "OR", "AUTOMATIC?"]
+      colors: [tech, muted, accent]
+    pause_after: 1.2          # a calm beat before the channel outro
+    sfx: []
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]
