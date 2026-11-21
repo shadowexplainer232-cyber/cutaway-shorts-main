@@ -12,6 +12,7 @@ from functools import lru_cache
 from PIL import Image, ImageDraw
 
 from .common import ROOT, font, rgb
+from .visuals_jet import draw_jet_engine, draw_jet_hook, draw_blade_cooling
 
 W, H = 1080, 1920
 
@@ -150,7 +151,7 @@ def _engine_3d(img, d, theta, col):
     d.text((W // 2, 1262), "Simplified animation", font=font(24), fill=col["muted"], anchor="mm")
 
 
-def _engine(img, d, vis, scene_t, col, brand, ep):
+def _engine(img, d, vis, scene_t, col, brand, ep, sec=0.0):
     theta = _theta(vis, scene_t)
     if _meta3d():
         _engine_3d(img, d, theta, col)
@@ -163,7 +164,7 @@ def _fade(color, bg, a):
     return _blend(bg, color, a)
 
 
-def _outro(img, d, vis, t, col, brand, ep):
+def _outro(img, d, vis, t, col, brand, ep, sec=0.0):
     cx, cy, r = W // 2, 640, 190
     # logo: amber ring drawing itself, a cyan cut-away quarter, a turning gear
     sweep = 300 * min(1.0, t * 2.5)
@@ -196,7 +197,8 @@ def _arrow(d, x1, y1, x2, y2, color):
         d.line([(x2, y2), (x2 - 34 * math.cos(ang + s), y2 - 34 * math.sin(ang + s))], fill=color, width=10)
 
 
-VISUALS = {"four_stroke": _engine, "outro": _outro}
+VISUALS = {"four_stroke": _engine, "outro": _outro, "jet_engine": draw_jet_engine,
+           "jet_hook": draw_jet_hook, "blade_cooling": draw_blade_cooling}
 
 
 # ---------------------------------------------------------------- text helpers
@@ -256,7 +258,7 @@ def make_renderer(brand, episode):
     series = episode.get("series", "")
     base = Image.new("RGB", (W, H), col["bg"])
 
-    def render(scene, scene_t, speaking_frac):
+    def render(scene, scene_t, speaking_frac, sec=0.0):
         img = base.copy()
         d = ImageDraw.Draw(img)
         vis = scene.get("visual", {})
@@ -268,7 +270,7 @@ def make_renderer(brand, episode):
             for line in _wrap(scene.get("on_screen", ""), f, W - 140, d):
                 d.text((W // 2, y), line, font=f, fill=col["text"], anchor="mm")
                 y += 92
-        VISUALS[vis["type"]](img, d, vis, scene_t, col, brand, episode)
+        VISUALS[vis["type"]](img, d, vis, scene_t, col, brand, episode, sec)
         _draw_subtitle(d, scene["text"], scene_t, col, 1.0 - speaking_frac)
         if not outro:
             d.text((W // 2, 1560), brand["channel_name"].upper(), font=font(30), fill=col["muted"], anchor="mm")

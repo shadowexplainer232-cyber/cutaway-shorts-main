@@ -33,7 +33,7 @@ def build(episode, brand, scene_audio, narration_wav, out_mp4, pad):
             frames = max(1, round(dur * fps))
             speaking = (dur - pad) / dur
             for n in range(frames):
-                img = renderer(scene, n / frames, speaking)
+                img = renderer(scene, n / frames, speaking, sec=n / fps)
                 proc.stdin.write(img.tobytes())
     finally:
         proc.stdin.close()

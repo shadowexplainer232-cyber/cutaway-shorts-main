@@ -77,7 +77,29 @@ def ding(sr):
     return _norm(x * np.exp(-t * 3.5))
 
 
+def jet_spool(sr):
+    """Rising jet whine: filtered noise plus a climbing tone."""
+    dur = 2.2
+    t = _t(sr, dur)
+    u = t / dur
+    ph = 2 * np.pi * np.cumsum(200 + 1400 * u ** 2) / sr
+    mix_ = 0.7 * _lp(_RNG.standard_normal(t.size), 4) + 0.4 * np.sin(ph)
+    return _norm(mix_ * u ** 1.2 * np.minimum(1, (dur - t) / 0.15))
+
+
+def shimmer(sr):
+    """Short rising chime for a reveal."""
+    out = np.zeros(int(sr * 1.0))
+    for k, f in enumerate((880, 1108, 1318, 1760)):
+        t = _t(sr, 0.6)
+        tone = np.sin(2 * np.pi * f * t) * np.exp(-t * 6)
+        s0 = int(k * 0.09 * sr)
+        out[s0:s0 + tone.size] += tone[: out.size - s0]
+    return _norm(out)
+
+
 LIB = {
+    "jet_spool": jet_spool, "shimmer": shimmer,
     "valve_click": valve_click, "whoosh": whoosh, "intake_whoosh": intake_whoosh,
     "compress": compress, "spark_zap": spark_zap, "thump": thump,
     "exhaust_puff": exhaust_puff, "ding": ding,

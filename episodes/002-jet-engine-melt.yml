@@ -1,0 +1,86 @@
+# Episode 002. status: draft -> approved (you set this) -> the scheduled job builds it.
+# To try it now without approving: run the workflow with episode "002" and tick test_mode.
+id: "002"
+slug: jet-engine-melt
+status: draft
+category: How Machines Work
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false   # procedural diagrams, no realistic AI footage
+
+# Why this hook (changes from episode 001): it opens with one concrete, visual problem
+# (gas hotter than the metal can survive), asks a simple question, promises the answer at the
+# END, and then delivers it. The four easy steps in the middle keep the viewer oriented while
+# the question stays open. The ending pays off the question, so there is no false suspense.
+titles:
+  - Why Doesn't a Jet Engine Melt?
+  - This Engine Runs Hotter Than Its Own Metal Can Survive
+  - How a Jet Engine Works (and Why It Doesn't Melt)
+upload_title_index: 0
+
+description: |
+  Inside a jet engine, the gas is hotter than the metal it flows past can survive.
+  So why doesn't the engine melt? In under a minute: the four steps of a jet engine, and
+  the cooling trick that keeps the turbine blades alive.
+
+  The animation is simplified and not to scale.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#jetengine", "#engineering", "#howitworks", "#aviation"]
+tags: [how jet engines work, jet engine explained, turbine blade cooling, why jet engines don't melt, gas turbine, aviation engineering]
+pinned_comment: "Which machine should we open up next? Tell us below."
+cover_frame_concept: "Glowing jet engine above a bar race: the gas bar crosses the metal's limit line. Big text: WHY DOESN'T IT MELT?"
+
+# Claims checked against the pages below (read on 2026-11-21).
+sources_status: VERIFIED
+sources:
+  - "NASA/CR-2001-210942, 'Heat Transfer in Gas Turbines' (V. K. Garg): modern engines run at inlet temperatures of 1800-2000 K, 'far beyond the allowable metal temperatures'; cooling air is bled from the compressor, flows through internal passages, and exits through film-cooling holes forming a cooler layer; a film-cooled blade can have hundreds of holes. https://ntrs.nasa.gov/api/citations/20010071841/downloads/20010071841.pdf"
+  - "GE Aerospace, GE9X engine page: overall pressure ratio 60:1 (core 27:1), 1 fan / 3 booster / 11 compressor stages. https://www.geaerospace.com/commercial/engines/ge9x-engine"
+  - "NASA Glenn, Brayton cycle: turbine engines have a compressor, a combustion section and a power turbine that drives the compressor on the same shaft; hot exhaust passes through the turbine, then the nozzle. https://www.grc.nasa.gov/www/k-12/airplane/brayton.html"
+  - "NASA Glenn, four-stroke engine stages (piston stages happen one after another in a cylinder). https://www.grc.nasa.gov/www/K-12/airplane/engstage.html"
+  - "NOTE: 1,500 C+ on screen = 1800 K converted (1527 C). 'Up to 60x pressure' is the GE9X figure; say 'biggest engines'. The claim that a jet engine's four jobs run in separate sections of one continuous flow follows from the engine layout above."
+
+next_up: "How a Turbocharger Works"   # planned, not yet produced
+
+# Estimated narration: about 48-52 seconds. Check the build log; trim if it prints a warning.
+scenes:
+  - id: hook
+    on_screen: "WHY DOESN'T IT MELT?"
+    text: "This engine's gas is hotter than its metal can survive. So why doesn't it melt? The answer is at the end."
+    visual: {type: jet_hook}
+    sfx: [{name: jet_spool, at: 0.0, gain: 0.8}, {name: thump, at: 3.0, gain: 0.5}]
+
+  - id: intake
+    on_screen: "1 · INTAKE"
+    text: "First, intake. A giant fan pulls air in. A jet engine never pauses: each job has its own section."
+    visual: {type: jet_engine, stage: intake, callout: "A GIANT FAN PULLS AIR IN"}
+    sfx: [{name: whoosh, at: 0.1}]
+
+  - id: compression
+    on_screen: "2 · COMPRESSION"
+    text: "Second, compression. Blades squeeze the air to as much as sixty times normal pressure."
+    visual: {type: jet_engine, stage: compression, callout: "UP TO 60× PRESSURE", callout_sub: "IN THE BIGGEST ENGINES"}
+    sfx: [{name: compress, at: 0.6}]
+
+  - id: combustion
+    on_screen: "3 · COMBUSTION"
+    text: "Third, combustion. Fuel sprays in and burns, and the gas expands with huge force."
+    visual: {type: jet_engine, stage: combustion, callout: "1,500°C+", callout_sub: "BURNING GAS"}
+    sfx: [{name: spark_zap, at: 1.2}, {name: thump, at: 1.25}]
+
+  - id: exhaust
+    on_screen: "4 · EXHAUST"
+    text: "Fourth, exhaust. The gas spins a turbine that powers the compressor, then blasts out the back. But that turbine sits in the fire."
+    visual: {type: jet_engine, stage: exhaust, callout: "THE TURBINE SITS IN THE FIRE", callout_sub: ""}
+    sfx: [{name: exhaust_puff, at: 0.2}, {name: jet_spool, at: 3.2, gain: 0.6}]
+
+  - id: reveal
+    on_screen: "THE TRICK: A FILM OF COOL AIR"
+    text: "So why doesn't it melt? Cool air from the compressor flows through channels inside each blade, then out through tiny holes, forming a protective layer."
+    visual: {type: blade_cooling}
+    sfx: [{name: shimmer, at: 2.0}]
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]
