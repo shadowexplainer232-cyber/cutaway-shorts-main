@@ -1,0 +1,98 @@
+# Episode 009. status: draft -> approved (you set this) -> the scheduled job builds it.
+# To try it now without approving: run the workflow with episode "009" and tick test_mode.
+id: "009"
+slug: nuclear-power-plant
+status: draft
+category: How Machines Work
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false   # procedural diagrams, no realistic AI footage
+
+# Chosen by the channel owner (civilian nuclear power, not weapons). Hook: it is "a way to boil water".
+# Ending format: lesson -> bonus fact -> viewer question -> calm beat -> channel.
+titles:
+  - How a Nuclear Power Plant Makes Electricity
+  - A Nuclear Plant Is Just a Way to Boil Water
+  - How Splitting Atoms Turns on the Lights
+upload_title_index: 0
+
+description: |
+  A nuclear power plant is, at heart, a way to boil water. In under a minute: how splitting atoms
+  makes heat, how heat makes steam, how steam spins a turbine, and what control rods do.
+
+  The animation is simplified and not to scale.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#nuclearpower", "#engineering", "#energy", "#howitworks"]
+tags: [how nuclear power plants work, how nuclear reactors work, nuclear power explained, control rods, steam turbine, how electricity is made]
+pinned_comment: "Which should we explain next: nuclear fusion or solar panels? Tell us below."
+cover_frame_concept: "Reactor, turbine and a glowing bulb in one line. Big text: JUST BOILING WATER?"
+
+# Claims checked against the pages below (read on 2026-11-21). No output, safety or cost figures are used.
+sources_status: VERIFIED
+sources:
+  - "U.S. Department of Energy, 'Nuclear 101: How Does a Nuclear Reactor Work?': fission is 'a process where atoms split and release energy'; 'The heat created by fission turns the water into steam'; the steam 'spins a turbine to produce electricity'; in a pressurized water reactor water is kept under high pressure 'to prevent the water from boiling' and heats 'a separate water source to create steam'; boiling water reactors make steam directly in the vessel; 'Control rods can then be inserted into the reactor core to reduce the reaction rate' (and withdrawn to increase it). https://www.energy.gov/ne/articles/nuclear-101-how-does-nuclear-reactor-work"
+  - "U.S. NRC, 'How does a nuclear power plant make electricity?': 'a nuclear reactor generates heat'; steam passes through a turbine, compared to 'a highly-sophisticated windmill'; 'the turbine turns the generator, and the generator makes electricity'; a nuclear reactor and 'a coal-fired boiler' are alternative heat sources for boiling water. https://www.nrc.gov/reading-rm/basic-ref/students/science-101/how-does-nuclear-power-plant-make-electricity.html"
+  - "U.S. NRC, pressurized water reactors: 'Pressurized water in the primary coolant loop carries the heat to the steam generator'; heat 'vaporizes the water in a secondary loop, producing steam'; core cooled by water 'circulated using electrically powered pumps'. https://www.nrc.gov/reactors/power/pwrs.html"
+  - "NOTE: the animation shows a generic reactor, not a specific design. Fission is explained only at the level of 'atoms split and release heat'; nothing about weapons is covered."
+
+next_up: "Nuclear Fusion vs Solar Panels"   # planned, depends on the viewer vote
+
+# Estimated narration: about 50 seconds at the slower pace. Check the build log.
+scenes:
+  - id: hook
+    on_screen: "JUST A WAY TO BOIL WATER?"
+    text: "A nuclear power plant is, at heart, a way to boil water. How does that make electricity?"
+    visual: {type: reactor, stage: plant, callout: "BOIL WATER → ELECTRICITY"}
+    sfx: [{name: whoosh, at: 0.2}]
+
+  - id: heat
+    on_screen: "1 · HEAT FROM ATOMS"
+    text: "Inside the reactor, atoms split and release heat. That heat turns water into steam."
+    visual: {type: reactor, stage: heat, callout: "SPLITTING ATOMS RELEASES HEAT"}
+    sfx: [{name: spark_zap, at: 0.6, gain: 0.5}, {name: exhaust_puff, at: 3.6, gain: 0.5}]
+
+  - id: turbine
+    on_screen: "2 · STEAM SPINS A TURBINE"
+    text: "The steam spins a turbine, and the turbine turns a generator that makes electricity."
+    visual: {type: reactor, stage: turbine, callout: "TURBINE → GENERATOR → ELECTRICITY"}
+    sfx: [{name: jet_spool, at: 0.4, gain: 0.5}, {name: ding, at: 4.5, gain: 0.4}]
+
+  - id: pwr
+    on_screen: "3 · TWO LOOPS"
+    text: "Many plants keep the hot water under pressure, so a second loop makes the steam."
+    visual: {type: reactor, stage: pwr, callout: "PRESSURE KEEPS THE CORE WATER FROM BOILING"}
+    sfx: [{name: valve_click, at: 0.6}]
+
+  - id: rods
+    on_screen: "4 · CONTROL RODS"
+    text: "Control rods slide in to slow the reaction, and out to speed it up."
+    visual: {type: reactor, stage: rods, callout: "RODS CONTROL THE REACTION RATE"}
+    sfx: [{name: thump, at: 0.4, gain: 0.5}, {name: thump, at: 3.4, gain: 0.5}]
+
+  - id: bonus
+    on_screen: ""
+    text: "One more thing. A coal plant boils water too. Only the heat source is different."
+    visual:
+      type: fact_card
+      label: "ONE MORE THING"
+      lines: ["COAL: BOIL WATER", "NUCLEAR: BOIL WATER", "ONLY THE HEAT DIFFERS"]
+      colors: [muted, tech, accent]
+      sub: "U.S. NRC"
+    sfx: [{name: ding, at: 0.3, gain: 0.5}]
+
+  - id: question
+    on_screen: ""
+    text: "Which should we explain next? Nuclear fusion, or solar panels? Tell us in the comments."
+    visual:
+      type: fact_card
+      label: "YOUR TURN"
+      lines: ["NUCLEAR FUSION", "OR", "SOLAR PANELS?"]
+      colors: [tech, muted, accent]
+    pause_after: 1.2          # a calm beat before the channel outro
+    sfx: []
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]
