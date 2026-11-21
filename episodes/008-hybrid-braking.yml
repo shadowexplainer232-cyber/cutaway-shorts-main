@@ -1,0 +1,100 @@
+# Episode 008. status: draft -> approved (you set this) -> the scheduled job builds it.
+# To try it now without approving: run the workflow with episode "008" and tick test_mode.
+id: "008"
+slug: hybrid-braking
+status: draft
+category: How Machines Work
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false   # procedural diagrams, no realistic AI footage
+
+# Car topic (car episodes have been the best performers). Hook: "your brakes can charge the battery".
+# Ending format: lesson -> bonus fact -> viewer question -> calm beat -> channel.
+titles:
+  - How a Hybrid Charges Its Battery When You Brake
+  - Your Brakes Can Charge Your Car
+  - Regenerative Braking Explained in 50 Seconds
+upload_title_index: 0
+
+description: |
+  In a hybrid, the brakes can charge the battery. Normal brakes turn the car's motion into
+  wasted heat. A hybrid can reverse its motor so it works like a generator. In under a minute:
+  how regenerative braking works and why friction brakes are still there.
+
+  The animation is simplified and not to scale.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#hybrid", "#regenerativebraking", "#cars", "#engineering"]
+tags: [regenerative braking, how hybrid cars work, how do hybrids charge, brake energy recovery, electric motor generator, how brakes work]
+pinned_comment: "Hybrid or fully electric: which would you pick? Tell us below."
+cover_frame_concept: "Wheel, motor/generator and battery with energy flowing backwards. Big text: BRAKES THAT CHARGE?"
+
+# Claims checked against the pages below (read on 2026-11-21). No battery sizes or efficiency claims
+# beyond the attributed estimate in the bonus scene.
+sources_status: VERIFIED
+sources:
+  - "HowStuffWorks, regenerative braking: when run in the opposite direction 'a properly designed motor becomes an electric generator'; the power 'can then be fed into a charging system for the car's batteries'; friction brakes: 'This friction is what turns the car's kinetic energy into heat'; hybrids and EVs 'also have friction brakes, as a kind of back-up system', which take over where regenerative braking 'simply won't supply enough stopping power'. https://auto.howstuffworks.com/regenerative-braking.htm"
+  - "Kelley Blue Book, how regenerative brakes work: 'Regenerative brakes work by reversing the electric motors that propel a car'; they 'act like a generator and feed energy back into the hybrid or electric system'; friction brakes turn energy 'into heat rather than motion'; hybrids and EVs 'typically use both types of braking systems'; the article cites '60% to 70% of braking energy' returned to the battery; regen 'isn't as good as friction brakes for emergencies'; little benefit at low speed. https://www.kbb.com/car-advice/how-regenerative-brakes-work"
+  - "Honda UK, regenerative braking: the motor 'reverses its role to work like a generator'; electricity is 'fed back into the battery, replenishing its charge'; used 'to top up, rather than fully charge' the battery; less benefit 'at low speeds, or with harsh or sudden braking'; cars still have traditional brakes. https://www.honda.co.uk/engineroom/cars/what-is-regenerative-braking-and-how-does-it-work"
+  - "NOTE: the 60-70% figure is one guide's estimate and is attributed as such in the script; it varies by car and situation and is not a promise."
+
+next_up: "What Does an Intercooler Do?"   # planned, not yet produced
+
+# Estimated narration: about 48 seconds at the slower pace. Check the build log.
+scenes:
+  - id: hook
+    on_screen: "BRAKES THAT CHARGE THE BATTERY?"
+    text: "When you brake in a hybrid, the brakes can charge the battery. How?"
+    visual: {type: regen, stage: switch, callout: "BRAKING CAN CHARGE THE BATTERY"}
+    sfx: [{name: whoosh, at: 0.2}, {name: shimmer, at: 3.2, gain: 0.5}]
+
+  - id: heat
+    on_screen: "1 · NORMAL BRAKES"
+    text: "Normal brakes turn the car's motion into heat, and that energy is wasted."
+    visual: {type: regen, stage: heat, callout: "MOTION → HEAT → WASTED"}
+    sfx: [{name: exhaust_puff, at: 0.5, gain: 0.5}]
+
+  - id: generator
+    on_screen: "2 · THE MOTOR REVERSES"
+    text: "In a hybrid, braking can reverse the motor. Now it works like a generator."
+    visual: {type: regen, stage: generator, callout: "THE MOTOR BECOMES A GENERATOR"}
+    sfx: [{name: spark_zap, at: 1.0, gain: 0.5}]
+
+  - id: battery
+    on_screen: "3 · THE BATTERY CHARGES"
+    text: "The electricity flows back into the battery, ready to use later."
+    visual: {type: regen, stage: battery, callout: "ENERGY GOES BACK INTO THE BATTERY"}
+    sfx: [{name: ding, at: 3.0, gain: 0.4}]
+
+  - id: both
+    on_screen: "4 · THE BACK-UP"
+    text: "Friction brakes are still there, and they take over when you need a hard stop."
+    visual: {type: regen, stage: both, callout: "BOTH BRAKES WORK TOGETHER"}
+    sfx: [{name: thump, at: 0.4, gain: 0.5}]
+
+  - id: bonus
+    on_screen: ""
+    text: "One guide says sixty to seventy percent of braking energy can go back to the battery."
+    visual:
+      type: fact_card
+      label: "ONE MORE THING"
+      lines: ["60-70% OF BRAKING ENERGY", "CAN GO BACK"]
+      colors: [accent, text]
+      sub: "one estimate, from Kelley Blue Book"
+    sfx: [{name: ding, at: 0.3, gain: 0.5}]
+
+  - id: question
+    on_screen: ""
+    text: "Hybrid or fully electric? Which would you pick? Tell us in the comments."
+    visual:
+      type: fact_card
+      label: "YOUR TURN"
+      lines: ["HYBRID", "OR", "FULLY ELECTRIC?"]
+      colors: [tech, muted, accent]
+    pause_after: 1.2          # a calm beat before the channel outro
+    sfx: []
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]

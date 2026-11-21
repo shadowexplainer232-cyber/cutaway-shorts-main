@@ -1,0 +1,99 @@
+# Episode 007. status: draft -> approved (you set this) -> the scheduled job builds it.
+# To try it now without approving: run the workflow with episode "007" and tick test_mode.
+id: "007"
+slug: roman-concrete
+status: draft
+category: Engineering & History
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false   # procedural diagrams, no realistic AI footage
+
+# Planned earlier (006's teaser). Hook: ancient buildings still stand, and new research suggests the concrete
+# can heal its own cracks. The self-healing claim is HEDGED on purpose (MIT: "suggests", "could").
+# Ending format: lesson -> bonus fact -> viewer question -> calm beat -> channel.
+titles:
+  - How Roman Concrete Can Heal Its Own Cracks
+  - Why Roman Buildings Are Still Standing
+  - The Secret Ingredient in Roman Concrete
+upload_title_index: 0
+
+description: |
+  Roman buildings are still standing, and new research suggests their concrete can heal its own
+  cracks. In under a minute: what the Romans mixed, what the white chunks inside are, and how a
+  crack can seal itself.
+
+  The animation is simplified and not to scale.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#romanconcrete", "#engineering", "#history", "#howitworks"]
+tags: [roman concrete, how roman concrete works, self healing concrete, pantheon dome, lime clasts, ancient engineering]
+pinned_comment: "Would you trust a building made like this? Tell us below."
+cover_frame_concept: "Concrete cross-section with a crack sealing through a white lime chunk. Big text: IT HEALS ITSELF?"
+
+# Claims checked against the pages below (read on 2026-11-21).
+sources_status: VERIFIED
+sources:
+  - "MIT News, 'Riddle solved: Why was Roman concrete so durable?' (2023-01-06): the white 'lime clasts' are 'made out of various forms of calcium carbonate'; the team concluded 'Hot mixing... was actually the key to the super-durable nature'; the new study 'suggests that these tiny lime clasts gave the concrete a previously unrecognized self-healing capability'; cracks 'can preferentially travel through the high-surface-area lime clasts', the lime reacts with water and can recrystallize as calcium carbonate, which 'automatically' heals cracks 'before they spread'; 'Within two weeks the cracks had completely healed' in the lab, and a sample made without quicklime never healed. https://news.mit.edu/2023/roman-concrete-durability-lime-casts-0106"
+  - "Smithsonian Magazine, 'The Secrets of Ancient Rome's Buildings': builders typically mixed 'three parts volcanic ash to one part lime' (Vitruvius); the ash reacted with the lime paste to form a durable mortar; the Pantheon's dome is still the 'largest unreinforced concrete dome in the world'. https://www.smithsonianmag.com/history/the-secrets-of-ancient-romes-buildings-234992/?page=2"
+  - "NOTE: no ages or years are stated in the script (the Pantheon's age was not read on a fetched page). The healing is described as what researchers 'suggest', as in the MIT article; the two-week result is a lab test, not a claim about every Roman building. The sea-harbour claim from Smithsonian is left out to keep one idea per scene."
+
+next_up: "How Hybrids Recover Braking Energy"   # episode 008
+
+# Estimated narration: about 50 seconds at the slower pace. Check the build log.
+scenes:
+  - id: hook
+    on_screen: "THIS CONCRETE HEALS ITSELF?"
+    text: "Roman buildings are still standing. And new research suggests their concrete can heal its own cracks."
+    visual: {type: concrete, stage: heal, speed: 1.4, callout: "CAN CONCRETE REPAIR ITSELF?"}
+    sfx: [{name: whoosh, at: 0.2}, {name: shimmer, at: 4.2, gain: 0.5}]
+
+  - id: mix
+    on_screen: "1 · THE RECIPE"
+    text: "The Romans mixed volcanic ash with lime to make their concrete."
+    visual: {type: concrete, stage: mix, callout: "VOLCANIC ASH + LIME"}
+    sfx: [{name: valve_click, at: 0.5}]
+
+  - id: dome
+    on_screen: "2 · STILL STANDING"
+    text: "The Pantheon's dome is still the largest unreinforced concrete dome in the world."
+    visual: {type: concrete, stage: dome, callout: "THE LARGEST UNREINFORCED CONCRETE DOME"}
+    sfx: [{name: thump, at: 0.4, gain: 0.5}]
+
+  - id: clast
+    on_screen: "3 · THE WHITE SPECKS"
+    text: "Inside are tiny white chunks of lime. Researchers say they gave it a hidden power."
+    visual: {type: concrete, stage: clast, callout: "TINY CHUNKS OF LIME"}
+    sfx: [{name: ding, at: 2.8, gain: 0.4}]
+
+  - id: heal
+    on_screen: "4 · THE SELF-REPAIR"
+    text: "When a crack forms, it runs through those chunks. Water reacts with the lime, and the crack can seal itself."
+    visual: {type: concrete, stage: heal, callout: "WATER + LIME = THE CRACK SEALS"}
+    sfx: [{name: valve_click, at: 0.8}, {name: shimmer, at: 5.4, gain: 0.6}]
+
+  - id: bonus
+    on_screen: ""
+    text: "In the lab, cracks healed within two weeks. A sample made without quicklime never healed."
+    visual:
+      type: fact_card
+      label: "ONE MORE THING"
+      lines: ["CRACKS HEALED IN TWO WEEKS", "WITHOUT QUICKLIME: NEVER"]
+      colors: [accent, text]
+      sub: "MIT lab test"
+    sfx: [{name: ding, at: 0.3, gain: 0.5}]
+
+  - id: question
+    on_screen: ""
+    text: "Should we build with Roman concrete today? Tell us in the comments."
+    visual:
+      type: fact_card
+      label: "YOUR TURN"
+      lines: ["SHOULD WE BUILD", "LIKE THE ROMANS", "TODAY?"]
+      colors: [tech, text, accent]
+    pause_after: 1.2          # a calm beat before the channel outro
+    sfx: []
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]

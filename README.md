@@ -24,6 +24,8 @@ video publicly: uploads are always **private**, and you press Publish in YouTube
 | 004 | `episodes/004-turbo-vs-supercharger.yml` | Turbo vs supercharger, with the new ending: bonus fact + viewer question before the channel |
 | 005 | `episodes/005-manual-gearbox.yml` | Why cars need gears, the clutch, and what the wrong gear does (3D-look gears) |
 | 006 | `episodes/006-rocket-steering.yml` | How rockets steer in space: swivelling engines, thrusters, spinning wheels |
+| 007 | `episodes/007-roman-concrete.yml` | Roman concrete: ash + lime, the Pantheon dome, lime chunks that may heal cracks |
+| 008 | `episodes/008-hybrid-braking.yml` | Hybrid regenerative braking: heat vs charging the battery |
 
 Run one from GitHub: Actions > Build Cutaway Short > Run workflow > episode `002`, tick `test_mode`
 (skips the draft/approval checks and never uploads). Visual types are in `src/visuals.py`,
