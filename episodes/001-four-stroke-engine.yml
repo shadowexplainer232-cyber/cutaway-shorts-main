@@ -67,6 +67,7 @@ scenes:
     on_screen: "2 TURNS · 1 POWER"
     text: "That is two full turns of the crankshaft per power stroke. The flywheel and the other cylinders carry the engine through the rest."
     visual: {type: four_stroke, phase: all}
+    pause_after: 1.2          # a calm beat before the channel outro
     sfx: [{name: whoosh, at: 0.0}]
 
   - id: outro

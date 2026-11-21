@@ -20,10 +20,16 @@ video publicly: uploads are always **private**, and you press Publish in YouTube
 |---|---|---|
 | 001 | `episodes/001-four-stroke-engine.yml` | How a four-stroke engine works |
 | 002 | `episodes/002-jet-engine-melt.yml` | Why a jet engine doesn't melt (new hook style) |
+| 003 | `episodes/003-turbocharger.yml` | How a turbocharger gives an engine more power (slower pace) |
 
 Run one from GitHub: Actions > Build Cutaway Short > Run workflow > episode `002`, tick `test_mode`
-(skips the draft/approval checks and never uploads). Visual types are in `src/visuals.py` and
-`src/visuals_jet.py`; each scene picks one with `visual: {type: ...}`.
+(skips the draft/approval checks and never uploads). Visual types are in `src/visuals.py`,
+`src/visuals_jet.py` and `src/visuals_turbo.py`; each scene picks one with `visual: {type: ...}`.
+
+## Pace
+`config/brand.yml`: `voice.length_scale` (1.25 = about 25% slower than Piper's default, which was ~190
+words/min) and `pad_after_scene_sec` (0.6 s after every scene). Any episode can override the speed
+with `length_scale:` and any scene can hold a longer beat with `pause_after:` (seconds).
 
 ## Sound, voice and 3D
 - **Narration:** Piper reads each scene. Set `voice.effect: robot` in `config/brand.yml` for a mechanical-sounding voice (untested on real speech: audition it before using it).

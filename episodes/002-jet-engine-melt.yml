@@ -41,7 +41,7 @@ sources:
 
 next_up: "How a Turbocharger Works"   # planned, not yet produced
 
-# Estimated narration: about 48-52 seconds. Check the build log; trim if it prints a warning.
+# Estimated narration: about 50 seconds at the slower pace. Check the build log.
 scenes:
   - id: hook
     on_screen: "WHY DOESN'T IT MELT?"
@@ -51,7 +51,7 @@ scenes:
 
   - id: intake
     on_screen: "1 · INTAKE"
-    text: "First, intake. A giant fan pulls air in. A jet engine never pauses: each job has its own section."
+    text: "First, intake. A giant fan pulls air in."
     visual: {type: jet_engine, stage: intake, callout: "A GIANT FAN PULLS AIR IN"}
     sfx: [{name: whoosh, at: 0.1}]
 
@@ -75,9 +75,10 @@ scenes:
 
   - id: reveal
     on_screen: "THE TRICK: A FILM OF COOL AIR"
-    text: "So why doesn't it melt? Cool air from the compressor flows through channels inside each blade, then out through tiny holes, forming a protective layer."
+    text: "So why doesn't it melt? Cool air flows through channels inside each blade, then out through tiny holes, forming a protective layer."
     visual: {type: blade_cooling}
-    sfx: [{name: shimmer, at: 2.0}]
+    pause_after: 1.2          # a calm beat on the answer before the channel outro
+    sfx: [{name: shimmer, at: 2.4}]
 
   - id: outro
     on_screen: ""

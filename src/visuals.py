@@ -13,6 +13,7 @@ from PIL import Image, ImageDraw
 
 from .common import ROOT, font, rgb
 from .visuals_jet import draw_jet_engine, draw_jet_hook, draw_blade_cooling
+from .visuals_turbo import draw_turbo
 
 W, H = 1080, 1920
 
@@ -198,7 +199,7 @@ def _arrow(d, x1, y1, x2, y2, color):
 
 
 VISUALS = {"four_stroke": _engine, "outro": _outro, "jet_engine": draw_jet_engine,
-           "jet_hook": draw_jet_hook, "blade_cooling": draw_blade_cooling}
+           "jet_hook": draw_jet_hook, "blade_cooling": draw_blade_cooling, "turbo": draw_turbo}
 
 
 # ---------------------------------------------------------------- text helpers

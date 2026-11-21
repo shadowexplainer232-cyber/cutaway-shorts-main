@@ -39,8 +39,9 @@ def _piper(text, out_wav, voice_name, data_dir, length_scale):
     subprocess.run(cmd, check=True)
 
 
-def _stub(text, out_wav):
-    seconds = max(1.5, len(text.split()) / 2.6)
+def _stub(text, out_wav, length_scale=1.0):
+    # Piper ryan-high speaks roughly 3.2 words/second at length_scale 1.0 (measured from a real run)
+    seconds = max(1.5, len(text.split()) / (3.2 / length_scale))
     subprocess.run(
         ["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi",
          "-i", "anullsrc=r=22050:cl=mono", "-t", f"{seconds:.2f}", "-c:a", "pcm_s16le", str(out_wav)],
@@ -72,21 +73,23 @@ def synthesize(episode, brand, workdir, mode="piper", audio_dir=None):
         _ensure_voice(voice["name"], data_dir)
 
     pad = float(brand["video"]["pad_after_scene_sec"])
+    length_scale = float(episode.get("length_scale", voice.get("length_scale", 1.0)))
     results = []
     for i, scene in enumerate(episode["scenes"]):
         wav = workdir / f"scene_{i:02d}_{scene['id']}.wav"
         if mode == "piper":
-            _piper(scene["text"], wav, voice["name"], data_dir, voice.get("length_scale", 1.0))
+            _piper(scene["text"], wav, voice["name"], data_dir, length_scale)
         elif mode == "files":
             _from_file(scene, i, audio_dir, wav)
         else:
-            _stub(scene["text"], wav)
-        results.append((scene, wav, _wav_seconds(wav) + pad))
+            _stub(scene["text"], wav, length_scale)
+        results.append((scene, wav, _wav_seconds(wav) + float(scene.get("pause_after", pad))))
     return results
 
 
 def join_narration(results, out_wav, pad):
-    """Concatenate scene WAVs with `pad` seconds of silence after each."""
+    """Concatenate scene WAVs; each scene is followed by silence so its slot equals its duration
+    (the scene's own `pause_after` if set, otherwise the default pad)."""
     params = None
     chunks = []
     for _, wav, _dur in results:
@@ -94,8 +97,9 @@ def join_narration(results, out_wav, pad):
             if params is None:
                 params = w.getparams()
             chunks.append(w.readframes(w.getnframes()))
-    silence = b"\x00" * (int(params.framerate * pad) * params.sampwidth * params.nchannels)
+    frame_bytes = params.sampwidth * params.nchannels
     with wave.open(str(out_wav), "wb") as out:
         out.setparams(params)
-        for c in chunks:
-            out.writeframes(c + silence)
+        for (_, _, dur), c in zip(results, chunks):
+            silent_frames = max(0, round(dur * params.framerate) - len(c) // frame_bytes)
+            out.writeframes(c + b"\x00" * (silent_frames * frame_bytes))

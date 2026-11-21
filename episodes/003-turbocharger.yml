@@ -1,0 +1,87 @@
+# Episode 003. status: draft -> approved (you set this) -> the scheduled job builds it.
+# To try it now without approving: run the workflow with episode "003" and tick test_mode.
+id: "003"
+slug: turbocharger
+status: draft
+category: How Machines Work
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false   # procedural diagrams, no realistic AI footage
+
+# Pacing for this episode (set after feedback that earlier videos felt too fast):
+#  - fewer ideas, one idea per scene, short sentences
+#  - voice about 25% slower (config/brand.yml length_scale) and a 0.6 s pause after every scene
+#  - a 1.2 s calm beat on the recap before the channel is mentioned
+titles:
+  - How a Turbocharger Gives an Engine More Power
+  - How Can a Small Engine Make More Power? The Turbocharger
+  - The Engine Part That Runs on Exhaust
+upload_title_index: 0
+
+description: |
+  How can an engine make more power without getting any bigger? A turbocharger uses the exhaust
+  leaving the engine to spin a turbine, which drives a compressor that forces extra air in.
+  More air means more fuel can burn, and that means more power.
+
+  The animation is simplified and not to scale.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#turbocharger", "#engineering", "#howitworks", "#cars"]
+tags: [how a turbocharger works, turbo explained, turbo lag, how engines work, engine boost, mechanical engineering]
+pinned_comment: "Turbocharger or supercharger: which should we explain next? Tell us below."
+cover_frame_concept: "Turbo diagram with the turbine ringed in amber. Big text: MORE POWER, SAME ENGINE?"
+
+# Claims checked against the pages below (read on 2026-11-21). The script avoids any spin-speed
+# (rpm) figure because none of the pages gave one.
+sources_status: VERIFIED
+sources:
+  - "UTI, 'How Does a Turbocharger Work?': a turbo 'uses exhaust gas pressure, volume and temperature to spin a turbine in the exhaust stream'; the turbine is 'linked with a shaft to the compressor wheel, which compresses the air charge before entering the engine'; 'When there is more air available to the engine, the engine can use more fuel.' https://www.uti.edu/blog/automotive/turbos"
+  - "CarAdvice, 'Turbocharging: How it works': turbos work 'using the engine's exhaust gas to spin a turbine wheel'; they can generate power 'without increasing the displacement of an engine'; 'This compressed forced air allows more fuel to be burnt and more power to be produced at the same engine speed.' https://www.caradvice.com.au/211373/turbocharging-how-works/"
+  - "Explain that Stuff, 'How turbochargers work': turbine and compressor sit 'on the same metal shaft so that both spin around together'; there is often a 'turbo lag' between pressing the accelerator and the turbo kicking in because it is powered by exhaust gas. https://www.explainthatstuff.com/how-turbochargers-work.html"
+  - "Haynes, superchargers vs turbochargers (for a later episode): a supercharger is belt-driven from the crank; a turbo is 'propelled by the exhaust gasses'. https://haynes.com/en-au/tips-tutorials/superchargers-and-turbochargers-what-s-difference"
+
+next_up: "Turbo vs Supercharger"   # planned, not yet produced
+
+# Estimated narration: about 48-50 seconds at the slower pace. Check the build log.
+scenes:
+  - id: hook
+    on_screen: "MORE POWER, SAME ENGINE?"
+    text: "How can an engine make more power without getting any bigger? The secret is in its exhaust."
+    visual: {type: turbo, stage: idle, callout: "THE SECRET IS IN THE EXHAUST"}
+    sfx: [{name: whoosh, at: 0.2}, {name: jet_spool, at: 3.4, gain: 0.5}]
+
+  - id: air
+    on_screen: "MORE AIR = MORE POWER"
+    text: "An engine burns fuel with air. More air means more fuel, and more power."
+    visual: {type: turbo, stage: air, callout: "MORE AIR → MORE FUEL → MORE POWER"}
+    sfx: [{name: intake_whoosh, at: 0.3}]
+
+  - id: turbine
+    on_screen: "1 · THE TURBINE"
+    text: "A turbocharger uses the exhaust leaving the engine to spin a turbine, joined by a shaft to a second wheel."
+    visual: {type: turbo, stage: turbine, callout: "EXHAUST GAS SPINS THE TURBINE"}
+    sfx: [{name: exhaust_puff, at: 0.4}]
+
+  - id: compressor
+    on_screen: "2 · THE COMPRESSOR"
+    text: "That second wheel, the compressor, forces extra air into the engine."
+    visual: {type: turbo, stage: compressor, callout: "THE COMPRESSOR PUSHES AIR IN"}
+    sfx: [{name: compress, at: 0.3}]
+
+  - id: lag
+    on_screen: "THE CATCH: TURBO LAG"
+    text: "The catch is turbo lag. It takes a moment of exhaust to get the turbo spinning."
+    visual: {type: turbo, stage: lag, callout: "IT TAKES A MOMENT TO SPIN UP"}
+    sfx: [{name: valve_click, at: 0.9}, {name: jet_spool, at: 1.3, gain: 0.7}]
+
+  - id: recap
+    on_screen: "THE WHOLE LOOP"
+    text: "Exhaust spins the turbine, the turbine drives the compressor, and the engine breathes more air."
+    visual: {type: turbo, stage: all, callout: "EXHAUST → TURBINE → COMPRESSOR → ENGINE"}
+    pause_after: 1.2          # a calm beat on the takeaway before the channel outro
+    sfx: [{name: shimmer, at: 0.2, gain: 0.6}]
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]

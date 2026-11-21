@@ -13,12 +13,12 @@ video:
   width: 1080
   height: 1920
   fps: 30
-  pad_after_scene_sec: 0.25   # silence added after each narrated scene
+  pad_after_scene_sec: 0.6    # silence after each narrated scene (a scene can set pause_after)
 
 # Piper voice. Check the voice's own licence/model card before monetising (see voices/VOICES.md).
 voice:
   name: en_US-ryan-high
-  length_scale: 1.0   # >1.0 = slower speech, <1.0 = faster
+  length_scale: 1.25  # >1.0 = slower speech, <1.0 = faster (1.0 was about 190 words/min: too fast)
   data_dir: voices
   effect: none        # none | robot  (robot = mechanical voice filter; test it on real speech first)
 
