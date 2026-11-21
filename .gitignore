@@ -1,5 +1,6 @@
 out/
 assets/engine3d/
+assets/intercooler3d/
 voices/*.onnx
 voices/*.json
 __pycache__/

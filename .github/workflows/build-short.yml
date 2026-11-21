@@ -60,7 +60,13 @@ jobs:
           path: assets/engine3d
           key: engine3d-${{ hashFiles('blender/engine_cycle.py', 'config/brand.yml') }}
 
-      - name: Render 3D engine (falls back to the 2D animation on any failure)
+      - name: Restore cached 3D intercooler frames
+        uses: actions/cache/restore@v4
+        with:
+          path: assets/intercooler3d
+          key: intercooler3d-${{ hashFiles('blender/intercooler.py', 'config/brand.yml') }}
+
+      - name: Render 3D scenes (each falls back to its 2D animation on any failure)
         continue-on-error: true
         run: python -m src.render_3d
 
@@ -70,6 +76,13 @@ jobs:
         with:
           path: assets/engine3d
           key: engine3d-${{ hashFiles('blender/engine_cycle.py', 'config/brand.yml') }}
+
+      - name: Save 3D intercooler frames (only when the render completed)
+        if: always() && hashFiles('assets/intercooler3d/meta.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: assets/intercooler3d
+          key: intercooler3d-${{ hashFiles('blender/intercooler.py', 'config/brand.yml') }}
 
       - name: Cache Piper voices
         uses: actions/cache@v4

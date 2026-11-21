@@ -1,0 +1,100 @@
+# Episode 010. status: draft -> approved (you set this) -> the scheduled job builds it.
+# To try it now without approving: run the workflow with episode "010" and tick test_mode.
+# FIRST EPISODE WITH A REAL BLENDER 3D SCENE (blender/intercooler.py). The first workflow run renders
+# 90 frames (cached afterwards). If the 3D render fails, the video uses the 2D animation instead.
+id: "010"
+slug: intercooler
+status: draft
+category: How Machines Work
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false   # procedural diagrams and a Blender-modelled scene, no realistic AI footage
+
+# Follows episode 003 (turbo) and the teaser at the end of episode 008. Car topic.
+# Ending format: lesson -> bonus fact -> viewer question -> calm beat -> channel.
+titles:
+  - What Does an Intercooler Do? (Turbo Explained)
+  - Why Turbo Cars Cool Their Air
+  - The Radiator for Air Inside Your Turbo Car
+upload_title_index: 0
+
+description: |
+  A turbo squeezes air into the engine, but squeezing air heats it up. An intercooler is like a
+  radiator for that air. In under a minute: why hot air is a problem, how an intercooler cools it,
+  and why cooler air is denser.
+
+  The animation is simplified and not to scale.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#intercooler", "#turbo", "#cars", "#engineering"]
+tags: [what does an intercooler do, how does an intercooler work, intercooler explained, turbo explained, charge air cooler, how engines work]
+pinned_comment: "Would you add a turbo to your car? Tell us below."
+cover_frame_concept: "3D intercooler with red-hot air entering and blue air leaving. Big text: HOT AIR, COOLED"
+
+# Claims checked against the pages below (read on 2026-11-21). No temperature or power figures are used.
+sources_status: VERIFIED
+sources:
+  - "Haynes, 'What is an intercooler and how does it work?': 'When you compress air, as is the case with a turbocharger, you heat it up'; 'The hotter it gets, the less oxygen rich it becomes, meaning it doesn't burn as well'; an intercooler 'cools the air, thus making it more oxygen rich' and 'does the same job as your radiator, but with air instead of water'; an air-to-air unit uses 'the air hitting it at speed to cool the compressed air travelling through it'; an air-to-water system 'can be much smaller, given that water is a far more effective heat absorber' but is 'only really worth it in extreme circumstances'. https://haynes.com/en-gb/tips-tutorials/what-intercooler-and-how-does-it-work"
+  - "SlashGear, 'What Is An Intercooler And Does It Increase Horsepower?': 'An intercooler is like a radiator but for air'; it lowers the temperature of the compressed air so 'the engine ingests colder, denser air'; air-to-air units rely 'on heavy airflow to cool the compressed air'; water-to-air units use water 'and [have] a separate radiator'. The same article says intercoolers 'are more about efficiency than adding power'. https://www.slashgear.com/1681665/intercooler-explained-increase-horsepower"
+  - "NOTE: sources differ on how much power an intercooler adds (Haynes says the right one gives more power; SlashGear says it is more about efficiency), so the script says only that the engine takes in more oxygen. The 3D scene is schematic: the compressor is drawn as a straight-through wheel, and the density of the air parcels is exaggerated."
+
+next_up: "Nuclear Fusion vs Solar Panels"   # depends on the viewer vote in episode 009
+
+# Estimated narration: about 46 seconds at the slower pace. Check the build log.
+scenes:
+  - id: hook
+    on_screen: "A TURBO'S HOT PROBLEM"
+    text: "A turbo squeezes air into the engine, but squeezing air heats it up. So what fixes that?"
+    visual: {type: intercooler, stage: overview, callout: "SQUEEZED AIR GETS HOT"}
+    sfx: [{name: whoosh, at: 0.2}]
+
+  - id: hot
+    on_screen: "1 · HOT AIR IS A PROBLEM"
+    text: "Hot air is less oxygen rich, so fuel doesn't burn as well."
+    visual: {type: intercooler, stage: hot, callout: "HOT AIR = LESS OXYGEN"}
+    sfx: [{name: compress, at: 0.4}]
+
+  - id: cool
+    on_screen: "2 · THE INTERCOOLER"
+    text: "An intercooler is like a radiator for air. It cools the air before it reaches the engine."
+    visual: {type: intercooler, stage: cool, callout: "A RADIATOR FOR AIR"}
+    sfx: [{name: shimmer, at: 0.4, gain: 0.5}]
+
+  - id: how
+    on_screen: "3 · HOW IT COOLS"
+    text: "Air flowing past the outside carries the heat away."
+    visual: {type: intercooler, stage: cool, callout: "OUTSIDE AIR CARRIES THE HEAT AWAY"}
+    sfx: [{name: whoosh, at: 0.3, gain: 0.5}]
+
+  - id: dense
+    on_screen: "4 · COOLER = DENSER"
+    text: "Cooler air is denser, so the engine takes in more oxygen."
+    visual: {type: intercooler, stage: dense, callout: "COOLER AIR = MORE OXYGEN"}
+    sfx: [{name: intake_whoosh, at: 0.3}]
+
+  - id: bonus
+    on_screen: ""
+    text: "One more thing. Some intercoolers use water instead of air, and can be smaller."
+    visual:
+      type: fact_card
+      label: "ONE MORE THING"
+      lines: ["SOME USE WATER", "INSTEAD OF AIR", "AND CAN BE SMALLER"]
+      colors: [accent, tech, text]
+      sub: "water absorbs heat better (Haynes)"
+    sfx: [{name: ding, at: 0.3, gain: 0.5}]
+
+  - id: question
+    on_screen: ""
+    text: "Would you add a turbo to your car? Tell us in the comments."
+    visual:
+      type: fact_card
+      label: "YOUR TURN"
+      lines: ["WOULD YOU ADD", "A TURBO", "TO YOUR CAR?"]
+      colors: [tech, text, accent]
+    pause_after: 1.2          # a calm beat before the channel outro
+    sfx: []
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]
