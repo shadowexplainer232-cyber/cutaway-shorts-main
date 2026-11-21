@@ -1,0 +1,100 @@
+# Episode 006. status: draft -> approved (you set this) -> the scheduled job builds it.
+# To try it now without approving: run the workflow with episode "006" and tick test_mode.
+id: "006"
+slug: rocket-steering
+status: draft
+category: How Machines Work
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false   # procedural diagrams, no realistic AI footage
+
+# Chosen by the channel owner (a "wow" engineering topic). Hook is a question that seems impossible:
+# no air in space, so what does a rocket push against?
+# Ending format: lesson -> bonus fact -> viewer question -> calm beat -> channel.
+titles:
+  - How Do Rockets Steer in Space With No Air?
+  - What Does a Rocket Push Against in Space?
+  - Rockets Work Better Without Air (Here's How They Steer)
+upload_title_index: 0
+
+description: |
+  There is no air in space. So what does a rocket push against to go, and to steer? In under a
+  minute: how rockets push, and three ways to turn: swivelling engines, small thrusters and
+  spinning wheels.
+
+  The animation is simplified and not to scale.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#rocket", "#space", "#engineering", "#howitworks"]
+tags: [how rockets steer in space, how rockets work without air, thrust vector control, reaction wheels, spacecraft thrusters, newton third law]
+pinned_comment: "Thrusters or spinning wheels: which would you steer a spacecraft with? Tell us below."
+cover_frame_concept: "Rocket with its engine swivelled in a starfield. Big text: NO AIR. HOW DOES IT STEER?"
+
+# Claims checked against the pages below (read on 2026-11-21). No speeds, thrust or altitude figures used.
+sources_status: VERIFIED
+sources:
+  - "NASA Glenn, rocket principles: 'The rocket pushes on the gas, and the gas in turn pushes on the rocket'; the question of working 'in space where there is no air for them to push against' is answered by the third law; 'The surrounding air impedes the action-reaction'; 'rockets actually work better in space than they do in air'; 'In space, the exhaust gases can escape freely'. https://www.grc.nasa.gov/www/k-12/rocket/TRCRocket/rocket_principles"
+  - "Smithsonian National Air and Space Museum, 'Thrusters and Spinning Wheels': 'the control surfaces that an airplane uses cannot work in airless space'; a spacecraft applies torque 'by firing small rockets or by spinning internal wheels'; 'a pair of thruster rockets on opposite sides of the vehicle are fired in opposite directions'; spinning wheels carry rotational momentum 'that the spacecraft can tap to change its own orientation'. https://howthingsfly.si.edu/flight-dynamics/thrusters-and-spinning-wheels"
+  - "Sciencing, 'How Does A Rocket Steer?': 'A gimbal system allows a rocket's engine (or engines) to pivot'; also small side thrusters and vernier thrusters. https://www.sciencing.com/1889780/how-does-rocket-steer"
+  - "NOTE: the animation's rotation directions and the wheel/body counter-rotation are schematic. The 'spins a wheel, the satellite turns' scene follows the Smithsonian wording about tapping wheel momentum; no further claim is made."
+
+next_up: "How Roman Concrete Lasts"   # episode 007, planned, not yet produced
+
+# Estimated narration: about 48 seconds at the slower pace. Check the build log.
+scenes:
+  - id: hook
+    on_screen: "NO AIR. HOW DO ROCKETS STEER?"
+    text: "There's no air in space. So what does a rocket push against to steer?"
+    visual: {type: rocket_steer, stage: space, callout: "HOW DOES IT STEER?"}
+    sfx: [{name: whoosh, at: 0.2}, {name: jet_spool, at: 3.0, gain: 0.5}]
+
+  - id: push
+    on_screen: "IT PUSHES ON ITS OWN EXHAUST"
+    text: "A rocket pushes on its own exhaust, and the exhaust pushes back. No air needed."
+    visual: {type: rocket_steer, stage: push, callout: "THE GAS PUSHES THE ROCKET"}
+    sfx: [{name: exhaust_puff, at: 0.4}]
+
+  - id: gimbal
+    on_screen: "1 · SWIVEL THE ENGINE"
+    text: "To turn, the engine can swivel. Tilt the nozzle, and the push changes direction."
+    visual: {type: rocket_steer, stage: gimbal, callout: "TILT THE NOZZLE, TURN THE ROCKET"}
+    sfx: [{name: valve_click, at: 1.0}]
+
+  - id: thrusters
+    on_screen: "2 · SMALL THRUSTERS"
+    text: "Small thrusters on the sides fire in pairs to rotate the spacecraft."
+    visual: {type: rocket_steer, stage: thrusters, callout: "TWO THRUSTERS, ONE TURN"}
+    sfx: [{name: exhaust_puff, at: 1.1, gain: 0.5}, {name: exhaust_puff, at: 1.15, gain: 0.5}]
+
+  - id: wheels
+    on_screen: "3 · SPINNING WHEELS"
+    text: "Some satellites spin internal wheels, and use their momentum to change direction."
+    visual: {type: rocket_steer, stage: wheels, callout: "THE WHEEL'S MOMENTUM TURNS IT"}
+    sfx: [{name: shimmer, at: 1.0, gain: 0.5}]
+
+  - id: bonus
+    on_screen: ""
+    text: "One more thing. Rockets actually work better in space than in air."
+    visual:
+      type: fact_card
+      label: "ONE MORE THING"
+      lines: ["ROCKETS WORK BETTER", "IN SPACE", "THAN IN AIR"]
+      colors: [accent, tech, text]
+      sub: "air gets in the way (NASA)"
+    sfx: [{name: ding, at: 0.3, gain: 0.5}]
+
+  - id: question
+    on_screen: ""
+    text: "Thrusters or spinning wheels? Which would you steer with? Tell us in the comments."
+    visual:
+      type: fact_card
+      label: "YOUR TURN"
+      lines: ["THRUSTERS", "OR", "SPINNING WHEELS?"]
+      colors: [tech, muted, accent]
+    pause_after: 1.2          # a calm beat before the channel outro
+    sfx: []
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]

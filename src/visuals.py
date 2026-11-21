@@ -17,6 +17,7 @@ from .visuals_turbo import draw_turbo
 from .visuals_boost import draw_boost_compare
 from .visuals_cards import draw_fact_card
 from .visuals_gears import draw_gearbox
+from .visuals_rocket import draw_rocket_steer
 
 W, H = 1080, 1920
 
@@ -203,7 +204,7 @@ def _arrow(d, x1, y1, x2, y2, color):
 
 VISUALS = {"four_stroke": _engine, "outro": _outro, "jet_engine": draw_jet_engine,
            "jet_hook": draw_jet_hook, "blade_cooling": draw_blade_cooling, "turbo": draw_turbo,
-           "boost_compare": draw_boost_compare, "fact_card": draw_fact_card, "gearbox": draw_gearbox}
+           "boost_compare": draw_boost_compare, "fact_card": draw_fact_card, "gearbox": draw_gearbox, "rocket_steer": draw_rocket_steer}
 
 
 # ---------------------------------------------------------------- text helpers
