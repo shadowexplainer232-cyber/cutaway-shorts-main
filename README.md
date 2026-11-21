@@ -21,6 +21,7 @@ video publicly: uploads are always **private**, and you press Publish in YouTube
 | 001 | `episodes/001-four-stroke-engine.yml` | How a four-stroke engine works |
 | 002 | `episodes/002-jet-engine-melt.yml` | Why a jet engine doesn't melt (new hook style) |
 | 003 | `episodes/003-turbocharger.yml` | How a turbocharger gives an engine more power (slower pace) |
+| 004 | `episodes/004-turbo-vs-supercharger.yml` | Turbo vs supercharger, with the new ending: bonus fact + viewer question before the channel |
 
 Run one from GitHub: Actions > Build Cutaway Short > Run workflow > episode `002`, tick `test_mode`
 (skips the draft/approval checks and never uploads). Visual types are in `src/visuals.py`,

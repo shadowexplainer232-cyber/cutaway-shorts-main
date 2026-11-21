@@ -67,13 +67,14 @@ def _flow(d, col, pts, n, speed, sec, color_fn, k):
         d.ellipse([x - 6, y - 6, x + 6, y + 6], fill=c)
 
 
-def _wheel(d, col, centre, rot, color, k):
+def _wheel(d, col, centre, rot, color, k, radius=R):
     bg, (x, y) = col["bg"], centre
-    d.ellipse([x - R - 10, y - R - 10, x + R + 10, y + R + 10], outline=_mix(bg, col["muted"], 0.3 + 0.5 * k), width=6)
-    d.ellipse([x - R, y - R, x + R, y + R], fill=_mix(bg, color, 0.06 + 0.12 * k))
+    r = radius
+    d.ellipse([x - r - 10, y - r - 10, x + r + 10, y + r + 10], outline=_mix(bg, col["muted"], 0.3 + 0.5 * k), width=6)
+    d.ellipse([x - r, y - r, x + r, y + r], fill=_mix(bg, color, 0.06 + 0.12 * k))
     for j in range(10):
         a = rot + 2 * math.pi * j / 10
-        d.line([(x, y), (x + R * 0.95 * math.cos(a), y + R * 0.95 * math.sin(a))],
+        d.line([(x, y), (x + r * 0.95 * math.cos(a), y + r * 0.95 * math.sin(a))],
                fill=_mix(bg, color, 0.3 + 0.7 * k), width=7)
     d.ellipse([x - 14, y - 14, x + 14, y + 14], fill=col["text"])
 
