@@ -106,9 +106,10 @@ LIB = {
 }
 
 
-def hum_bed(sr, dur):
-    """Quiet low engine idle under the whole video."""
-    t = _t(sr, dur)
+def hum_bed(sr, n):
+    """Quiet low engine idle under the whole video, exactly n samples long."""
+    t = np.arange(n) / sr
+    dur = n / sr
     x = np.sin(2 * np.pi * 48 * t) * (0.6 + 0.4 * np.sin(2 * np.pi * 12 * t)) + 0.3 * np.sin(2 * np.pi * 96 * t)
     fade = np.minimum(1, np.minimum(t / 0.6, (dur - t) / 0.6))
     return _norm(x) * np.clip(fade, 0, 1)
@@ -142,7 +143,7 @@ def mix(voice_wav, out_wav, scene_starts, episode, brand):
     cfg = brand.get("sfx", {})
     if cfg.get("enabled", True):
         vol = float(cfg.get("volume", 0.5))
-        out += float(cfg.get("hum_volume", 0.06)) * hum_bed(sr, out.size / sr)
+        out += float(cfg.get("hum_volume", 0.06)) * hum_bed(sr, out.size)
         for scene, start in zip(episode["scenes"], scene_starts):
             for ev in scene.get("sfx", []):
                 fx = LIB[ev["name"]](sr) * vol * float(ev.get("gain", 1.0))
