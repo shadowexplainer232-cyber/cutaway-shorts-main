@@ -66,6 +66,12 @@ jobs:
           path: assets/intercooler3d
           key: intercooler3d-${{ hashFiles('blender/intercooler.py', 'config/brand.yml') }}
 
+      - name: Restore cached 3D tokamak frames
+        uses: actions/cache/restore@v4
+        with:
+          path: assets/tokamak3d
+          key: tokamak3d-${{ hashFiles('blender/tokamak.py', 'config/brand.yml') }}
+
       - name: Render 3D scenes (each falls back to its 2D animation on any failure)
         continue-on-error: true
         run: python -m src.render_3d
@@ -83,6 +89,13 @@ jobs:
         with:
           path: assets/intercooler3d
           key: intercooler3d-${{ hashFiles('blender/intercooler.py', 'config/brand.yml') }}
+
+      - name: Save 3D tokamak frames (only when the render completed)
+        if: always() && hashFiles('assets/tokamak3d/meta.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: assets/tokamak3d
+          key: tokamak3d-${{ hashFiles('blender/tokamak.py', 'config/brand.yml') }}
 
       - name: Cache Piper voices
         uses: actions/cache@v4

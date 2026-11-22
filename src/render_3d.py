@@ -6,6 +6,7 @@ missing, disabled, or a scene fails, that scene silently keeps its 2D animation.
 Scenes (frames are cached in assets/<name>/ and reused by every episode):
   engine3d       blender/engine_cycle.py   four-stroke engine (frames/samples from config/brand.yml)
   intercooler3d  blender/intercooler.py    compressor -> intercooler -> engine loop (90 frames)
+  tokamak3d      blender/tokamak.py        tokamak with plasma and magnet coils (60 frames)
 """
 import json
 import os
@@ -19,6 +20,7 @@ from .common import ROOT, load_brand
 SCENES = [
     ("engine3d", "engine_cycle.py", None),
     ("intercooler3d", "intercooler.py", 90),
+    ("tokamak3d", "tokamak.py", 60),
 ]
 
 

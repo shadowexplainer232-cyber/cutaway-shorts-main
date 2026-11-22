@@ -29,6 +29,7 @@ video publicly: uploads are always **private**, and you press Publish in YouTube
 | 009 | `episodes/009-nuclear-power-plant.yml` | How a nuclear power plant makes electricity (civilian): heat, steam, turbine, control rods |
 | 010 | `episodes/010-intercooler.yml` | What an intercooler does. First episode with a real Blender 3D scene (falls back to 2D) |
 | 011 | `episodes/011-engine-cooling.yml` | How a car radiator and cooling loop keep an engine from overheating |
+| 012 | `episodes/012-nuclear-fusion.yml` | How nuclear fusion works (civilian): fusion, plasma, tokamak, power. Blender 3D tokamak with 2D fallback |
 
 Run one from GitHub: Actions > Build Cutaway Short > Run workflow > episode `002`, tick `test_mode`
 (skips the draft/approval checks and never uploads). Visual types are in `src/visuals.py`,
