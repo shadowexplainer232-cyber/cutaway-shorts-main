@@ -30,7 +30,7 @@ video publicly: uploads are always **private**, and you press Publish in YouTube
 | 010 | `episodes/010-intercooler.yml` | What an intercooler does. First episode with a real Blender 3D scene (falls back to 2D) |
 | 011 | `episodes/011-engine-cooling.yml` | How a car radiator and cooling loop keep an engine from overheating |
 | 012 | `episodes/012-nuclear-fusion.yml` | How nuclear fusion works (civilian): fusion, plasma, tokamak, power. Blender 3D tokamak with 2D fallback |
-| 013 | Starship booster catch (3D, illustrative) | draft | blender/aero/starship_catch.py |
+| 013 | `episodes/013-starship-booster-catch.yml` | Starship booster catch: tower arms, 71 m booster. Illustrative 3D (Blender, built on your PC) with 2D stand-in |
 
 Run one from GitHub: Actions > Build Cutaway Short > Run workflow > episode `002`, tick `test_mode`
 (skips the draft/approval checks and never uploads). Visual types are in `src/visuals.py`,
