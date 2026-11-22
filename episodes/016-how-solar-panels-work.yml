@@ -1,0 +1,115 @@
+# Episode 016: how solar panels work (civilian energy). 3D: blender/aero/solar_panel.py
+# (render on your PC: python -m studio.render_scenes 016 --preview). Without renders a 2D stand-in is drawn.
+id: "016"
+slug: how-solar-panels-work
+status: draft
+category: Science & Energy
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false
+render: {script: blender/aero/solar_panel.py}
+
+titles:
+  - How Solar Panels Work (Sunlight to Electricity)
+  - How Does Sunlight Become Electricity? Solar Panels Explained
+  - Solar Panels Explained in 50 Seconds
+upload_title_index: 0
+
+description: |
+  Cells, electrons and an electric current. In under a minute: how a solar panel turns sunlight into
+  electricity you can use at home.
+
+  The 3D animation is a simplified schematic, not to scale; the electrons are drawn as simple dots.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#solarpower", "#solarpanels", "#energy", "#howitworks"]
+tags: [how solar panels work, solar panel explained, photovoltaic cell, how sunlight becomes electricity, solar energy]
+pinned_comment: "Should we explain how batteries work next? Tell us below."
+cover_frame_concept: "Glowing solar panel with electrons flowing. Big text: SUN TO POWER"
+
+# Claims checked against the two U.S. Department of Energy pages below (read 2026-11-22). Only their statements are used.
+sources_status: UNVERIFIED     # set to VERIFIED yourself after you read the pages
+sources:
+  - "U.S. DOE, 'Solar Photovoltaic Cell Basics': the cell is made of semiconductor material; it 'absorbs the light's energy and transfers it to negatively charged particles in the material called electrons'; 'This extra energy allows the electrons to flow through the material as an electrical current'; metal contacts (grid-like lines) collect the current; 'Multijunction solar cells have demonstrated efficiencies higher than 45%.' https://www.energy.gov/eere/solar/solar-photovoltaic-cell-basics"
+  - "U.S. DOE, 'Solar Photovoltaic Technology Basics': 'A single PV device is known as a cell'; cells 'are connected in chains to form larger units known as modules or panels'; the system takes the 'direct-current (DC) electricity produced by modules' and converts it to 'the alternating-current (AC) electricity used to power the appliances in your home.' https://www.energy.gov/index.php/eere/solar/solar-photovoltaic-technology-basics"
+  - "NOT SOURCED, so NOT in the narration or the model: silicon, p-n layers, efficiency of a typical rooftop panel, costs. The electrons in the animation are schematic dots."
+
+next_up: "How Batteries Work"
+
+scenes:
+  - id: hook
+    on_screen: ""
+    text: "How does a flat panel turn sunlight into electricity?"
+    visual: {type: render_clip, clip: hook, standin: solar, badge: "SIMPLIFIED MODEL"}
+    sfx: [{name: shimmer, at: 0.3, gain: 0.5}]
+
+  - id: cell
+    on_screen: ""
+    text: "A panel is made of cells. A cell is a semiconductor, and it absorbs the light's energy and passes it to electrons."
+    visual:
+      type: render_clip
+      clip: cell
+      standin: solar
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "LIGHT ENERGY → ELECTRONS", at: 3.0, until: 8.0, x: 540, y: 1240}]
+    sfx: [{name: ding, at: 3.0, gain: 0.4}]
+
+  - id: current
+    on_screen: ""
+    text: "That extra energy lets the electrons flow as an electric current, and metal contacts collect it."
+    visual:
+      type: render_clip
+      clip: current
+      standin: solar
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "ELECTRONS FLOW = CURRENT", at: 1.5, until: 8.0, x: 540, y: 1240}]
+    sfx: [{name: spark_zap, at: 1.5, gain: 0.4}]
+
+  - id: panel
+    on_screen: ""
+    text: "Many cells are connected in chains to form a panel."
+    visual:
+      type: render_clip
+      clip: panel
+      standin: solar
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "CELLS IN CHAINS = A PANEL", at: 1.0, until: 7.0, x: 540, y: 1240}]
+    sfx: []
+
+  - id: lesson
+    on_screen: ""
+    text: "The panel makes direct current, DC. Other equipment converts it to alternating current, AC, for the appliances in your home."
+    visual:
+      type: render_clip
+      clip: home
+      standin: solar
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "DC → AC → YOUR HOME", at: 1.5, until: 8.0, x: 540, y: 1240}]
+    sfx: [{name: valve_click, at: 2.0}]
+
+  - id: bonus
+    on_screen: ""
+    text: "Bonus fact: some multijunction solar cells have demonstrated efficiencies above forty-five percent."
+    visual:
+      type: fact_card
+      label: "ONE MORE THING"
+      lines: ["MULTIJUNCTION CELLS:", "OVER 45%", "EFFICIENCY, DEMONSTRATED"]
+      colors: [accent, text, tech]
+      sub: "U.S. Department of Energy"
+    sfx: [{name: ding, at: 0.3, gain: 0.5}]
+
+  - id: question
+    on_screen: ""
+    text: "Should we explain how batteries work next? Tell us in the comments."
+    visual:
+      type: fact_card
+      label: "YOUR TURN"
+      lines: ["HOW BATTERIES", "WORK NEXT?"]
+      colors: [accent, text]
+    pause_after: 1.2
+    sfx: []
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]

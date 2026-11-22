@@ -33,6 +33,7 @@ video publicly: uploads are always **private**, and you press Publish in YouTube
 | 013 | `episodes/013-starship-booster-catch.yml` | Starship booster catch: tower arms, 71 m booster. Illustrative 3D (Blender, built on your PC) with 2D stand-in |
 | 014 | `episodes/014-bugatti-w16-engine.yml` | Bugatti W16: 16 cylinders, one crankshaft, four turbos. Stylised generic car + simplified Blender engine, 2D stand-in |
 | 015 | `episodes/015-how-a-rocket-engine-works.yml` | How a rocket engine works: fuel + oxidiser, chamber, nozzle, thrust, why it works in space. Schematic Blender 3D, 2D stand-in |
+| 016 | `episodes/016-how-solar-panels-work.yml` | How solar panels work: cells, electrons, current, DC to AC. Schematic Blender 3D, 2D stand-in |
 
 Run one from GitHub: Actions > Build Cutaway Short > Run workflow > episode `002`, tick `test_mode`
 (skips the draft/approval checks and never uploads). Visual types are in `src/visuals.py`,

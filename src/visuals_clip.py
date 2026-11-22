@@ -115,6 +115,27 @@ def _standin_rocket_engine(d, col, clip, sec, u):
             d.ellipse([cx + sx * 130 - 8, 600 + 100 * ph - 8, cx + sx * 130 + 8, 600 + 100 * ph + 8], fill=c)
 
 
+def _standin_solar(d, col, clip, sec, u):
+    """Sun, tilted panel of cells, dots flowing to a small house."""
+    bg, ac, tech, txt = col["bg"], col["accent"], col["tech"], col["text"]
+    d.ellipse([780, 330, 920, 470], fill=ac)
+    for k in range(5):
+        ph = (sec * 0.4 + k / 5) % 1.0
+        x, y = 850 - 400 * ph, 400 + 380 * ph
+        d.ellipse([x - 9, y - 9, x + 9, y + 9], fill=ac)
+    for i in range(4):
+        for j in range(3):
+            x0, y0 = 220 + i * 100, 620 + j * 90
+            d.polygon([(x0 + 20, y0), (x0 + 110, y0), (x0 + 90, y0 + 80), (x0, y0 + 80)], fill=_mix(bg, tech, 0.35), outline=txt)
+    d.polygon([(620, 1010), (800, 1010), (710, 940)], fill=_mix(bg, ac, 0.4))                 # roof
+    d.rectangle([640, 1010, 780, 1110], outline=txt, width=4)
+    if clip in ("current", "home", "panel"):
+        for k in range(6):
+            ph = (sec * 0.35 + k / 6) % 1.0
+            x, y = 440 + 260 * ph, 880 + 120 * ph
+            d.ellipse([x - 9, y - 9, x + 9, y + 9], fill=tech)
+
+
 def draw_render_clip(img, d, vis, scene_t, col, brand, ep, sec=0.0):
     clip = vis["clip"]
     path = clip_dir(ep, clip)
@@ -124,7 +145,7 @@ def draw_render_clip(img, d, vis, scene_t, col, brand, ep, sec=0.0):
         img.paste(_frame(path, frame_index(meta, scene_t)), (0, 0))
         stand = False
     else:
-        {"engine": _standin_engine, "rocket_engine": _standin_rocket_engine}.get(vis.get("standin"), _standin)(d, col, clip, sec, scene_t)
+        {"engine": _standin_engine, "rocket_engine": _standin_rocket_engine, "solar": _standin_solar}.get(vis.get("standin"), _standin)(d, col, clip, sec, scene_t)
         stand = True
     if vis.get("badge"):
         f = font(28)
