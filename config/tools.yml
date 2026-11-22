@@ -1,0 +1,50 @@
+# Settings for the local studio tools (FreeCAD, Kdenlive, Poly Haven, Blender, Qwen).
+# These tools run on YOUR Windows PC. The GitHub cloud workflow does not use this file.
+# Nothing here installs anything. Leave a path empty to auto-detect it.
+
+paths:
+  blender: ""        # e.g. C:\Program Files\Blender Foundation\Blender 4.2\blender.exe
+  freecadcmd: ""     # e.g. C:\Program Files\FreeCAD 1.0\bin\FreeCADCmd.exe
+  kdenlive: ""       # e.g. C:\Program Files\kdenlive\bin\kdenlive.exe
+  melt: ""           # optional: MLT command-line renderer shipped with Kdenlive
+  ffmpeg: ""         # optional: otherwise ffmpeg on PATH is used
+
+# Poly Haven (https://polyhaven.com). All assets are CC0. Defaults keep downloads small for an 8 GB PC.
+polyhaven:
+  user_agent: "CutawayStudio/1.0 (github.com/shadowexplainer232-cyber/cutaway-shorts-main)"
+  dir: assets/polyhaven            # downloaded files (git-ignored); manifest.json is committed
+  hdri_resolution: 1k              # 1k is enough for lighting and reflections
+  hdri_format: hdr
+  texture_resolution: 1k
+  texture_format: jpg
+  texture_maps: [Diffuse, nor_gl, Rough, arm]   # arm = AO/roughness/metal packed
+  model_resolution: 1k
+  model_format: blend              # blend | gltf | fbx
+  max_download_mb: 60              # refuse a single asset bigger than this unless --force
+
+# Blender rendering on the PC (13+ episodes use blender/aero/*)
+render:
+  engine: BLENDER_EEVEE_NEXT       # use BLENDER_EEVEE on Blender 4.1 or older; CYCLES is the slow fallback
+  preview_scale: 25                # % of 1080x1920 for quick test renders
+  final_scale: 100
+  samples: 32                      # Eevee TAA samples
+  fps: 30
+  out_dir: renders                 # renders/<episode>/<scene>/f_0001.png (git-ignored)
+
+# FreeCAD export defaults
+cad:
+  out_dir: assets/cad              # assets/cad/<model>/<model>.step|stl|obj (git-ignored)
+  linear_deflection: 0.1           # mesh accuracy in mm (smaller = finer, heavier)
+  angular_deflection_deg: 15
+  blender_scale: 0.001             # FreeCAD works in mm, Blender in metres
+
+# Kdenlive edit project folders
+edit:
+  dir: edit                        # edit/<episode>/ organised media (git-ignored)
+  profile_name: Cutaway Vertical 1080x1920 30fps
+
+# Qwen (script drafting). Optional: needs a local Ollama server (https://ollama.com) with a Qwen model.
+qwen:
+  endpoint: http://localhost:11434/api/generate
+  model: qwen2.5:7b                # a 7B model fits 8 GB RAM only when nothing else is running
+  timeout_sec: 600

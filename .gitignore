@@ -7,3 +7,9 @@ voices/*.json
 __pycache__/
 *.pyc
 client_secret*.json
+renders/
+edit/*
+!edit/templates/
+assets/polyhaven/*/
+assets/cad/
+episodes/drafts/

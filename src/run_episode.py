@@ -80,6 +80,10 @@ def main():
     if total > 59:
         print("WARNING: longer than ~59s; trim the script (target 25-50s).")
 
+    # Extra exports for editing in Kdenlive (additive): scene timings and an SRT matching the burned-in subtitles
+    from studio.subtitles import write_exports
+    write_exports(ep, scenes, pad, out)
+
     mp4 = out / f"{ep['id']}-{ep['slug']}.mp4"
     build(ep, brand, scenes, narration_wav, mp4, pad)
     print("Built", mp4)
