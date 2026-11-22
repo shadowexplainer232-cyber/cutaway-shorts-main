@@ -132,6 +132,13 @@ class Render(unittest.TestCase):
                 q = (math.sin(t) * s, math.cos(t) * s); p = (cr * math.sin(phi), cr * math.cos(phi))
                 self.assertAlmostEqual(math.hypot(q[0] - p[0], q[1] - p[1]), rod, places=9)
 
+    def test_rocket_engine_plan(self):
+        from studio import render_scenes as rs
+        from src.common import load_yaml, ROOT
+        script, clips = rs.plan(load_yaml(ROOT / "episodes" / "015-how-a-rocket-engine-works.yml"))
+        self.assertEqual(clips, ["hook", "tanks", "chamber", "nozzle", "thrust", "space"])
+        self.assertTrue((ROOT / script).exists())
+
     def test_frame_index_stretches_clip(self):
         from src.visuals_clip import frame_index
         m = {"frames": 11, "fps": 15}

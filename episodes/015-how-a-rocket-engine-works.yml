@@ -1,0 +1,127 @@
+# Episode 015: how a rocket engine works (civilian engineering; no weapons content).
+# 3D scenes: blender/aero/rocket_engine.py (render on your PC: python -m studio.render_scenes 015 --preview).
+# Without renders a simple 2D stand-in is drawn. The engine is a schematic, not any real engine, not to scale.
+id: "015"
+slug: how-a-rocket-engine-works
+status: draft
+category: Engineering
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false
+render: {script: blender/aero/rocket_engine.py}
+
+titles:
+  - How a Rocket Engine Works (And Why It Works in Space)
+  - How Do Rockets Fly Without Air? Rocket Engines Explained
+  - Rocket Engine Explained in 50 Seconds
+upload_title_index: 0
+
+description: |
+  Fuel and oxidiser, a combustion chamber and a nozzle. In under a minute: how a liquid rocket engine makes
+  thrust, and why it works in the vacuum of space.
+
+  The 3D engine is a simplified schematic, not to scale and not a real engine.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#rocket", "#engineering", "#physics", "#howitworks"]
+tags: [how a rocket engine works, rocket engine explained, how do rockets work in space, nozzle, thrust, newton third law]
+pinned_comment: "What should we explain next: solar panels or a jet engine vs a rocket? Tell us below."
+cover_frame_concept: "Glowing rocket engine cutaway. Big text: NO AIR NEEDED?"
+
+# Claims checked against the NASA Glenn pages below (read 2026-11-22). Only their statements are used.
+sources_status: UNVERIFIED     # set to VERIFIED yourself after you read the pages
+sources:
+  - "NASA Glenn, 'Liquid Rocket Engine': 'In a liquid rocket, stored fuel and stored oxidizer are pumped into a combustion chamber where they are mixed and burned.' 'The combustion produces great amounts of exhaust gas at high temperature and pressure.' 'The hot exhaust is passed through a nozzle which accelerates the flow.' 'Thrust is produced according to Newton's third law of motion.' Since the oxidizer is carried on board, 'rockets can generate thrust in a vacuum'. https://www.grc.nasa.gov/www/K-12/airplane/lrockth.html"
+  - "NASA Glenn, 'Rocket Thrust': 'For every action there is an equal and opposite reaction'; rockets carry their own oxidizer; 'In outer space there is no atmosphere so turbines and propellers can not work there.' https://www.grc.nasa.gov/www/K-12/airplane/rocket.html"
+  - "NOT SOURCED, so NOT in the narration: pump types, real chamber pressures or temperatures, any named engine. The 3D model is a schematic."
+
+next_up: "How Solar Panels Work"
+
+scenes:
+  - id: hook
+    on_screen: ""
+    text: "There is no air in space. So how does a rocket engine push anything?"
+    visual: {type: render_clip, clip: hook, standin: rocket_engine, badge: "SIMPLIFIED MODEL"}
+    sfx: [{name: whoosh, at: 0.2}]
+
+  - id: tanks
+    on_screen: ""
+    text: "It starts with two liquids, a fuel and an oxidiser, both carried on board."
+    visual:
+      type: render_clip
+      clip: tanks
+      standin: rocket_engine
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "FUEL", at: 1.5, until: 7.0, x: 300, y: 1240}, {text: "OXIDISER", at: 1.5, until: 7.0, x: 780, y: 1240}]
+    sfx: [{name: valve_click, at: 1.5}]
+
+  - id: chamber
+    on_screen: ""
+    text: "Pumps push them into a combustion chamber, where they mix and burn."
+    visual:
+      type: render_clip
+      clip: chamber
+      standin: rocket_engine
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "COMBUSTION CHAMBER", at: 2.5, until: 7.0, x: 540, y: 1240}]
+    sfx: [{name: spark_zap, at: 2.5, gain: 0.5}]
+
+  - id: nozzle
+    on_screen: ""
+    text: "The burning makes hot, high pressure gas. A nozzle speeds it up."
+    visual:
+      type: render_clip
+      clip: nozzle
+      standin: rocket_engine
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "THE NOZZLE SPEEDS UP THE GAS", at: 2.5, until: 8.0, x: 540, y: 1240}]
+    sfx: [{name: jet_spool, at: 0.5, gain: 0.5}]
+
+  - id: thrust
+    on_screen: ""
+    text: "Gas goes out one way, so the rocket is pushed the other. Equal and opposite."
+    visual:
+      type: render_clip
+      clip: thrust
+      standin: rocket_engine
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "GAS OUT = ROCKET PUSHED", at: 2.0, until: 8.0, x: 540, y: 1240}]
+    sfx: []
+
+  - id: lesson
+    on_screen: ""
+    text: "It carries its own oxidiser, so it needs no air, and works in the vacuum of space."
+    visual:
+      type: render_clip
+      clip: space
+      standin: rocket_engine
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "NO AIR NEEDED", at: 1.5, until: 8.0, x: 540, y: 1240}]
+    sfx: [{name: shimmer, at: 1.0, gain: 0.4}]
+
+  - id: bonus
+    on_screen: ""
+    text: "Bonus fact: jets and propellers need outside air, so they fail in space."
+    visual:
+      type: fact_card
+      label: "ONE MORE THING"
+      lines: ["JETS AND PROPELLERS", "NEED OUTSIDE AIR", "ROCKETS DO NOT"]
+      colors: [accent, text, tech]
+      sub: "NASA Glenn"
+    sfx: [{name: ding, at: 0.3, gain: 0.5}]
+
+  - id: question
+    on_screen: ""
+    text: "Should we explain solar panels next? Tell us in the comments."
+    visual:
+      type: fact_card
+      label: "YOUR TURN"
+      lines: ["SOLAR PANELS", "NEXT?"]
+      colors: [accent, text]
+    pause_after: 1.2
+    sfx: []
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]

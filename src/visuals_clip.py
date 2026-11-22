@@ -95,6 +95,26 @@ def _standin_engine(d, col, clip, sec, u):
                 d.ellipse([cx + (x - cx) * ph - 9, cy + (y - cy) * ph - 9, cx + (x - cx) * ph + 9, cy + (y - cy) * ph + 9], fill=(255, 150, 40))
 
 
+def _standin_rocket_engine(d, col, clip, sec, u):
+    """Side view: two propellant tanks, chamber, narrow throat, bell nozzle, exhaust dots."""
+    bg, ac, tech, txt = col["bg"], col["accent"], col["tech"], col["text"]
+    cx = 540
+    d.rounded_rectangle([cx - 230, 330, cx - 30, 600], radius=30, outline=ac, width=5, fill=_mix(bg, ac, 0.15))
+    d.rounded_rectangle([cx + 30, 330, cx + 230, 600], radius=30, outline=tech, width=5, fill=_mix(bg, tech, 0.15))
+    d.rectangle([cx - 90, 700, cx + 90, 860], outline=txt, width=5)                          # chamber
+    d.polygon([(cx - 90, 860), (cx + 90, 860), (cx + 35, 930), (cx - 35, 930)], outline=txt, width=5)   # throat
+    d.polygon([(cx - 35, 930), (cx + 35, 930), (cx + 150, 1120), (cx - 150, 1120)], outline=txt, width=5)  # bell
+    for k in range(10):
+        ph = (sec * 0.5 + k / 10) % 1.0
+        y = 880 + 380 * ph ** 1.5
+        x = cx + 20 * math.sin(k * 3 + sec * 6) * (0.3 + ph)
+        d.ellipse([x - 9, y - 9, x + 9, y + 9], fill=(255, 150, 40))
+    for sx, c in ((-1, ac), (1, tech)):
+        for k in range(4):
+            ph = (sec * 0.4 + k / 4) % 1.0
+            d.ellipse([cx + sx * 130 - 8, 600 + 100 * ph - 8, cx + sx * 130 + 8, 600 + 100 * ph + 8], fill=c)
+
+
 def draw_render_clip(img, d, vis, scene_t, col, brand, ep, sec=0.0):
     clip = vis["clip"]
     path = clip_dir(ep, clip)
@@ -104,7 +124,7 @@ def draw_render_clip(img, d, vis, scene_t, col, brand, ep, sec=0.0):
         img.paste(_frame(path, frame_index(meta, scene_t)), (0, 0))
         stand = False
     else:
-        (_standin_engine if vis.get("standin") == "engine" else _standin)(d, col, clip, sec, scene_t)
+        {"engine": _standin_engine, "rocket_engine": _standin_rocket_engine}.get(vis.get("standin"), _standin)(d, col, clip, sec, scene_t)
         stand = True
     if vis.get("badge"):
         f = font(28)
