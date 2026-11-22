@@ -67,6 +67,34 @@ def _standin(d, col, clip, sec, u):
         d.line([tx + 40, ay, bx - bw / 2 + 4, ay], fill=ac, width=14)
 
 
+def _standin_engine(d, col, clip, sec, u):
+    """Simple end-on W16 sketch (four rows of cylinders around one crankshaft) or a plain car side view."""
+    bg, ac, tech, muted, txt = col["bg"], col["accent"], col["tech"], col["muted"], col["text"]
+    if clip in ("intro", "ending"):
+        d.rounded_rectangle([140, 820, 940, 960], radius=60, fill=_mix(bg, txt, 0.25), outline=ac, width=4)
+        d.rounded_rectangle([380, 740, 760, 840], radius=50, fill=_mix(bg, txt, 0.15))
+        for x in (280, 800):
+            d.ellipse([x - 85, 900, x + 85, 1070], fill=_mix(bg, txt, 0.1), outline=ac, width=4)
+        return
+    cx, cy = 540, 820
+    d.ellipse([cx - 30, cy - 30, cx + 30, cy + 30], fill=_mix(bg, txt, 0.5))                     # crankshaft end
+    for r, ang in enumerate((-52.5, -37.5, 37.5, 52.5)):
+        a = math.radians(ang)
+        for k in range(4):
+            dist = 110 + 62 * k
+            x, y = cx + dist * math.sin(a), cy - dist * math.cos(a)
+            lit = clip == "layout" and _ease(sec * 0.4 - r * 0.17) > 0.5
+            d.ellipse([x - 24, y - 24, x + 24, y + 24], outline=ac if r % 2 == 0 else tech, width=4,
+                      fill=_mix(bg, ac if r % 2 == 0 else tech, 0.5 if lit else 0.12))
+    if clip in ("turbos", "running"):
+        for sx in (-1, 1):
+            for sy in (-1, 1):
+                x, y = cx + sx * 330, cy + 120 + sy * 150
+                d.ellipse([x - 45, y - 45, x + 45, y + 45], outline=tech, width=5)
+                ph = (sec * 0.5 + (sx + 2 * sy) * 0.13) % 1.0
+                d.ellipse([cx + (x - cx) * ph - 9, cy + (y - cy) * ph - 9, cx + (x - cx) * ph + 9, cy + (y - cy) * ph + 9], fill=(255, 150, 40))
+
+
 def draw_render_clip(img, d, vis, scene_t, col, brand, ep, sec=0.0):
     clip = vis["clip"]
     path = clip_dir(ep, clip)
@@ -76,7 +104,7 @@ def draw_render_clip(img, d, vis, scene_t, col, brand, ep, sec=0.0):
         img.paste(_frame(path, frame_index(meta, scene_t)), (0, 0))
         stand = False
     else:
-        _standin(d, col, clip, sec, scene_t)
+        (_standin_engine if vis.get("standin") == "engine" else _standin)(d, col, clip, sec, scene_t)
         stand = True
     if vis.get("badge"):
         f = font(28)

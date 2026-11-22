@@ -1,0 +1,135 @@
+# Episode 014: the Bugatti W16 engine. status: draft -> approved (you set this).
+# 3D scenes: blender/aero/w16.py (render on your PC: python -m studio.render_scenes 014 --preview).
+# Without renders a simple 2D stand-in is drawn. The car is a STYLISED GENERIC hypercar, not a Chiron model.
+id: "014"
+slug: bugatti-w16-engine
+status: draft
+category: Engineering
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false   # procedural 3D illustration, no real footage
+render: {script: blender/aero/w16.py}
+
+titles:
+  - How Bugatti's W16 Engine Works (16 Cylinders, 4 Turbos)
+  - What Makes the Bugatti W16 So Extraordinary?
+  - The Engineering Behind Bugatti's W16
+upload_title_index: 0
+
+description: |
+  Sixteen cylinders, one shared crankshaft and four turbochargers. In under a minute: how Bugatti's
+  8.0-litre W16 is laid out and how its turbochargers help it make so much power.
+
+  The 3D engine is a simplified layout model, not Bugatti's engineering drawings, and the car shown is a
+  generic stylised hypercar, not a real Bugatti model. Figures: Chiron 1,500 PS; first Veyron 1,001 PS.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#bugatti", "#w16", "#engine", "#engineering"]
+tags: [bugatti w16, w16 engine explained, how a w16 works, chiron engine, veyron engine, quad turbo]
+pinned_comment: "Which engine should we open up next? Tell us below."
+cover_frame_concept: "Glowing W-shaped engine with four turbos. Big text: 16 CYLINDERS"
+
+# Checked against Bugatti's own pages (read 2026-11-22). Veyron and Chiron figures are kept separate.
+sources_status: UNVERIFIED     # set to VERIFIED yourself after you read the pages below
+sources:
+  - "Bugatti newsroom, 'Bugatti W16 engine: the last of its kind': 8.0-litre W16 with four turbochargers 'just like Veyron'; Veyron 'starting at 1,001 PS', Super Sport/Vitesse +200 PS; Chiron 1,500 PS at launch (1,600 PS in later versions); only 'the compact engine shape and the pitch of 73 millimeters' were kept from the Veyron engine. https://newsroom.bugatti.com/press-releases/bugatti-w16-engine-the-last-of-its-kind"
+  - "Bugatti, 'Veyron technology': 8-litre W16, 'four turbochargers' driven by exhaust gases, 'a 90 degree bank angle', 'Each bank has eight cylinders in a VR arrangement', one crankshaft. https://www.bugatti.com/en/classic-icons/bugatti-veyron-technology"
+  - "DERIVED, please check: '4 rows of 4' follows from two VR8 banks (each VR8 is two staggered rows of four). The bank angle is given for the Veyron engine; the narration does not state it for the Chiron."
+  - "NOT STATED as fact: bore, stroke, rod length, crank phasing and turbo positions in the 3D model are illustrative."
+
+next_up: "How a Rocket Engine Works"
+
+scenes:
+  - id: hook
+    on_screen: ""
+    text: "What makes a Bugatti engine one of the most extraordinary pieces of automotive engineering?"
+    visual: {type: render_clip, clip: intro, standin: engine, badge: "STYLISED CAR"}
+    sfx: [{name: whoosh, at: 0.2}]
+
+  - id: reveal
+    on_screen: ""
+    text: "Lift the cover, and you find an eight litre engine with sixteen cylinders."
+    visual:
+      type: render_clip
+      clip: reveal
+      standin: engine
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "8.0 LITRES · 16 CYLINDERS", at: 2.5, until: 7.0, x: 540, y: 1240}]
+    sfx: [{name: valve_click, at: 2.0}]
+
+  - id: layout
+    on_screen: ""
+    text: "The cylinders sit in a compact W shape, all driving one shared crankshaft."
+    visual:
+      type: render_clip
+      clip: layout
+      standin: engine
+      badge: "SIMPLIFIED MODEL"
+      labels:
+        - {text: "4 ROWS OF 4 CYLINDERS", at: 1.0, until: 6.0, x: 540, y: 1240}
+        - {text: "ONE SHARED CRANKSHAFT", at: 6.5, until: 12.0, x: 540, y: 1240}
+    sfx: [{name: ding, at: 1.0, gain: 0.4}]
+
+  - id: turbos
+    on_screen: ""
+    text: "Four turbochargers use the exhaust to spin turbines. Those drive compressors, which push extra air into the engine."
+    visual:
+      type: render_clip
+      clip: turbos
+      standin: engine
+      badge: "SIMPLIFIED MODEL"
+      labels:
+        - {text: "EXHAUST SPINS THE TURBINE", at: 1.5, until: 6.0, x: 540, y: 1240}
+        - {text: "COMPRESSOR PUSHES AIR IN", at: 6.5, until: 12.0, x: 540, y: 1240}
+    sfx: [{name: jet_spool, at: 0.5, gain: 0.5}]
+
+  - id: running
+    on_screen: ""
+    text: "More air means more fuel can burn, and that means more power."
+    visual:
+      type: render_clip
+      clip: running
+      standin: engine
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "MORE AIR = MORE POWER", at: 1.0, until: 6.0, x: 540, y: 1240}]
+    sfx: []
+
+  - id: lesson
+    on_screen: ""
+    text: "In the Chiron, that adds up to fifteen hundred PS, a metric horsepower."
+    visual:
+      type: render_clip
+      clip: ending
+      standin: engine
+      badge: "STYLISED CAR"
+      labels:
+        - {text: "8.0 L · W16 · 4 TURBOS", at: 0.5, until: 4.0, x: 540, y: 1180}
+        - {text: "CHIRON: 1,500 PS", at: 4.0, until: 8.0, x: 540, y: 1180}
+    sfx: [{name: ding, at: 0.5, gain: 0.5}]
+
+  - id: bonus
+    on_screen: ""
+    text: "Bonus fact: the first version, in the Veyron, made one thousand and one PS, from the same eight litres."
+    visual:
+      type: fact_card
+      label: "ONE MORE THING"
+      lines: ["VEYRON W16:", "1,001 PS", "ALSO 8.0 LITRES"]
+      colors: [accent, text, tech]
+      sub: "Bugatti newsroom"
+    sfx: [{name: ding, at: 0.3, gain: 0.5}]
+
+  - id: question
+    on_screen: ""
+    text: "Which engine should we open up next? Tell us in the comments."
+    visual:
+      type: fact_card
+      label: "YOUR TURN"
+      lines: ["WHICH ENGINE", "NEXT?"]
+      colors: [accent, text]
+    pause_after: 1.2
+    sfx: []
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Engineering beyond imagination. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]

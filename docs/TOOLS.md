@@ -69,3 +69,10 @@ Frames go to `renders/013/<scene>/` (git-ignored). The episode's `render_clip` v
 adds labels and an ILLUSTRATIVE badge; without renders it draws a 2D stand-in. Use a Poly Haven HDRI for lighting:
 `python -m studio.polyhaven get <hdri-id> --type hdris` (picked up automatically). First real-Blender run is untested:
 start with `--preview --frames 5` and send me any error.
+
+## Episode 014 (Bugatti W16)
+`blender/aero/w16.py`: stylised generic hypercar (no Bugatti badge or body), simplified W16 (4 rows of 4, 73 mm pitch from
+Bugatti's press release, everything else illustrative), one crankshaft with moving pistons and rods (rod length stays constant,
+unit-tested), four turbochargers with spinning wheels and animated hot/cold airflow spheres. Same commands as 013
+(`python -m studio.render_scenes 014 --preview`). FreeCAD W16 layout blockout: `python -m studio.cad make w_engine_blockout`.
+A photoreal Chiron is not possible from procedural scripts; a licensed car model would have to be supplied by you.

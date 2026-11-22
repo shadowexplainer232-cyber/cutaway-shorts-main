@@ -115,6 +115,23 @@ class Render(unittest.TestCase):
         self.assertIn("25", cmd); self.assertIn("--frames", cmd)
         self.assertIn("100", rs.command("blender", script, "catch", "out", {}, True))
 
+    def test_w16_plan_and_kinematics(self):
+        import math
+        from studio import render_scenes as rs
+        from src.common import load_yaml, ROOT
+        script, clips = rs.plan(load_yaml(ROOT / "episodes" / "014-bugatti-w16-engine.yml"))
+        self.assertEqual(clips, ["intro", "reveal", "layout", "turbos", "running", "ending"])
+        self.assertTrue((ROOT / script).exists())
+        cr, rod = 0.43, 1.45                       # connecting rod length must stay constant (same formula as w16.py)
+        for th in (-52.5, -37.5, 37.5, 52.5):
+            t = math.radians(th)
+            for k in range(30):
+                phi = k * 0.4
+                a = phi - t
+                s = cr * math.cos(a) + math.sqrt(rod ** 2 - (cr * math.sin(a)) ** 2)
+                q = (math.sin(t) * s, math.cos(t) * s); p = (cr * math.sin(phi), cr * math.cos(phi))
+                self.assertAlmostEqual(math.hypot(q[0] - p[0], q[1] - p[1]), rod, places=9)
+
     def test_frame_index_stretches_clip(self):
         from src.visuals_clip import frame_index
         m = {"frames": 11, "fps": 15}
