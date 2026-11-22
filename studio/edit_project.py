@@ -179,6 +179,8 @@ def build_project(ep_arg, run_dir=None, renders=None, music=None, force=False, l
     ffmpeg = find_tool("ffmpeg")
     rdir = Path(renders) if renders else ROOT / cfg.get("render", {}).get("out_dir", "renders") / ep["id"]
     clips = {}
+    if not rdir.exists() and (rdir.parent / f"{ep['id']}_preview").exists():
+        rdir = rdir.parent / f"{ep['id']}_preview"
     if rdir.exists() and ffmpeg:
         for i, sc in enumerate(tl["scenes"], 1):
             for cand in (rdir / sc["id"], rdir / f"{i:02d}_{sc['id']}", rdir / f"scene_{i:02d}"):

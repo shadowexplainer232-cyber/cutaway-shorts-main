@@ -54,3 +54,18 @@ later episodes start from it. The tool never overwrites your edits (use `--force
 Verified in the build sandbox: Poly Haven file selection, manifest, SRT/timeline, MLT XML validity, edit-folder
 creation, Qwen YAML handling. **Not yet run against real Blender, FreeCAD, Kdenlive, melt, Ollama or the live Poly Haven API.**
 Report any error and it will be fixed.
+
+## 3D episodes with the aero toolkit (episode 013 and later)
+`blender/aero/aero.py` = reusable helpers (Eevee setup, HDRI hook, materials, primitives, tracking camera, resumable render loop).
+`blender/aero/starship_catch.py` = tower, two arms, booster (33 engines as 3+10+20), launch mount; scenes intro, mechazilla,
+return, catch, engineering, ending. Models are **illustrations**: only the booster height (71 m) and engine count come from a source.
+```
+python -m studio.render_scenes 013 --list
+python -m studio.render_scenes 013 --preview            # 25% size, 15 frames/s, one scene at a time
+python -m studio.render_scenes 013 --final --only catch # full size, resumable
+python -m studio.edit_project 013                       # after: python -m src.run_episode 013 --tts piper --force
+```
+Frames go to `renders/013/<scene>/` (git-ignored). The episode's `render_clip` visual stretches each clip to its scene and
+adds labels and an ILLUSTRATIVE badge; without renders it draws a 2D stand-in. Use a Poly Haven HDRI for lighting:
+`python -m studio.polyhaven get <hdri-id> --type hdris` (picked up automatically). First real-Blender run is untested:
+start with `--preview --frames 5` and send me any error.

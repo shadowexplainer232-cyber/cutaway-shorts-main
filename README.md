@@ -30,6 +30,7 @@ video publicly: uploads are always **private**, and you press Publish in YouTube
 | 010 | `episodes/010-intercooler.yml` | What an intercooler does. First episode with a real Blender 3D scene (falls back to 2D) |
 | 011 | `episodes/011-engine-cooling.yml` | How a car radiator and cooling loop keep an engine from overheating |
 | 012 | `episodes/012-nuclear-fusion.yml` | How nuclear fusion works (civilian): fusion, plasma, tokamak, power. Blender 3D tokamak with 2D fallback |
+| 013 | Starship booster catch (3D, illustrative) | draft | blender/aero/starship_catch.py |
 
 Run one from GitHub: Actions > Build Cutaway Short > Run workflow > episode `002`, tick `test_mode`
 (skips the draft/approval checks and never uploads). Visual types are in `src/visuals.py`,
@@ -73,3 +74,6 @@ makes a silent test video. Stub renders are never uploaded.
 - GitHub disables scheduled workflows in repos with no activity for a long time.
 - Sample episode facts (four strokes, 720 degrees, one power stroke per two revolutions, 3,000 rpm = 1,500 cycles per minute per cylinder) are standard engineering knowledge, but cite sources before approving.
 - The animation is simplified (no valve overlap); the video says so on screen.
+
+## Studio tools (FreeCAD, Kdenlive, Poly Haven, Qwen)
+See docs/TOOLS.md. Check your PC with `python -m studio.doctor`; tests: `python -m unittest tests.test_studio`.

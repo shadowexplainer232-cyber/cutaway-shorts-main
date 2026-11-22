@@ -1,0 +1,115 @@
+# Episode 013: the Starship booster catch. status: draft -> approved (you set this).
+# 3D scenes come from blender/aero/starship_catch.py (render on your PC: python -m studio.render_scenes 013 --preview).
+# Without renders the pipeline draws a simple 2D stand-in, so the cloud workflow still builds it.
+# Only the BOOSTER is shown being caught. The upper stage is never shown being caught.
+id: "013"
+slug: starship-booster-catch
+status: draft
+category: Engineering
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false   # procedural 3D illustration, no real footage and no AI-generated realistic footage
+render: {script: blender/aero/starship_catch.py}
+
+titles:
+  - How SpaceX Caught a Rocket With Giant Arms
+  - What If You Could Catch a Rocket? Starship Booster Catch Explained
+  - Catching a 71-Metre Rocket in Mid-Air
+upload_title_index: 0
+
+description: |
+  In October 2024 SpaceX caught the returning Super Heavy booster with the arms of its launch tower.
+  A quick look at how that works.
+
+  The 3D scenes are an illustration: the tower, arms and catch hardware are simplified and not to scale,
+  and are not SpaceX engineering drawings.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#spacex", "#starship", "#engineering", "#rocket"]
+tags: [spacex booster catch, starship catch, mechazilla, super heavy, chopsticks, how rockets land]
+pinned_comment: "Should we explain how rocket engines work next? Tell us below."
+cover_frame_concept: "Booster hovering between two giant arms. Big text: CAUGHT?"
+
+# Only facts found on the page below (PBS NewsHour / AP, read 2026-11-22) are stated as facts.
+# Anything not on a source is NOT in the narration. Reasons for catching (weight, speed of reuse) are left out until a source is added.
+sources_status: UNVERIFIED     # set to VERIFIED yourself after you check the pages below
+sources:
+  - "PBS NewsHour / AP, 'In an engineering feat, mechanical SpaceX arms catch Starship rocket booster back at its launch pad' (13 Oct 2024): the '232-foot (71-meter) stainless steel booster'; '33 methane-fuel engines on the booster alone'; the arms were nicknamed 'chopsticks'; the booster 'flew back to the pad it had launched from' about seven minutes earlier; the arms 'gripped it tightly, dangling it well above the ground'; the complete vehicle is 'almost 400 feet (121 meters)'. https://www.pbs.org/newshour/science/in-engineering-feat-by-spacex-mechanical-arms-catch-starship-booster-back-at-its-launch-pad"
+  - "NOT SOURCED, so NOT in the narration: tower height, arm length, the catch hardware, why SpaceX prefers catching. The 3D models use made-up illustrative values for these and are badged ILLUSTRATIVE."
+  - "TO CHECK before approving: more recent flights may have changed what is 'first' or 'latest'; the script says only what happened on 13 October 2024."
+
+next_up: "How Rocket Engines Work"
+
+scenes:
+  - id: hook
+    on_screen: "CATCH A ROCKET?"
+    text: "What if you could catch a rocket, instead of landing it?"
+    visual: {type: render_clip, clip: intro, badge: "ILLUSTRATIVE 3D"}
+    sfx: [{name: whoosh, at: 0.2}]
+
+  - id: tower
+    on_screen: ""
+    text: "The idea is a launch tower with two huge arms, nicknamed chopsticks."
+    visual:
+      type: render_clip
+      clip: mechazilla
+      badge: "ILLUSTRATIVE 3D"
+      labels: [{text: "TWO ARMS", at: 2.0, until: 6.0, x: 540, y: 1240}]
+    sfx: [{name: valve_click, at: 2.5}]
+
+  - id: return
+    on_screen: ""
+    text: "In October 2024, the 71 metre Super Heavy booster flew back to the pad it launched from, about seven minutes after liftoff."
+    visual:
+      type: render_clip
+      clip: return
+      badge: "ILLUSTRATIVE 3D"
+      labels: [{text: "71 M BOOSTER", at: 2.0, until: 6.0, x: 540, y: 1240}, {text: "33 ENGINES", at: 6.5, until: 11.0, x: 540, y: 1240}]
+    sfx: [{name: jet_spool, at: 0.5, gain: 0.5}]
+
+  - id: catch
+    on_screen: ""
+    text: "Then the arms closed around it, and gripped it tightly, high above the ground."
+    visual:
+      type: render_clip
+      clip: catch
+      badge: "ILLUSTRATIVE 3D"
+      labels: [{text: "ARMS CLOSE", at: 2.5, until: 7.0, x: 540, y: 1240}]
+    sfx: [{name: thump, at: 4.5}]
+
+  - id: lesson
+    on_screen: ""
+    text: "So the booster returns to the very pad it left, held by the tower."
+    visual:
+      type: render_clip
+      clip: engineering
+      badge: "ILLUSTRATIVE 3D"
+      labels: [{text: "ARMS AND HARDPOINTS: SIMPLIFIED", at: 0.5, until: 6.0, x: 540, y: 1240, size: 30}]
+    sfx: []
+
+  - id: bonus
+    on_screen: ""
+    text: "Bonus fact: the whole Starship stack stands almost four hundred feet tall, about one hundred twenty-one metres."
+    visual:
+      type: fact_card
+      label: "ONE MORE THING"
+      lines: ["THE FULL STACK:", "ALMOST 400 FEET", "ABOUT 121 METRES"]
+      colors: [accent, text, tech]
+      sub: "AP / PBS NewsHour, 2024"
+    sfx: [{name: ding, at: 0.3, gain: 0.5}]
+
+  - id: question
+    on_screen: ""
+    text: "Should we explain how rocket engines work next? Tell us in the comments."
+    visual:
+      type: fact_card
+      label: "YOUR TURN"
+      lines: ["ROCKET ENGINES", "NEXT?"]
+      colors: [accent, text]
+    pause_after: 1.2
+    sfx: []
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Engineering beyond imagination. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]

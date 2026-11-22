@@ -103,5 +103,30 @@ class Misc(unittest.TestCase):
         self.assertIsNone(paths.find_tool("kdenlive", {"paths": {}}) if not paths.shutil.which("kdenlive") else None)
 
 
+class Render(unittest.TestCase):
+    def test_plan_and_command(self):
+        from studio import render_scenes as rs
+        from src.common import load_yaml, ROOT
+        ep = load_yaml(ROOT / "episodes" / "013-starship-booster-catch.yml")
+        script, clips = rs.plan(ep)
+        self.assertEqual(clips, ["intro", "mechazilla", "return", "catch", "engineering"])
+        self.assertTrue((ROOT / script).exists())
+        cmd = rs.command("blender", script, "catch", "out", {"preview_scale": 25, "final_scale": 100}, False, frames=3)
+        self.assertIn("25", cmd); self.assertIn("--frames", cmd)
+        self.assertIn("100", rs.command("blender", script, "catch", "out", {}, True))
+
+    def test_frame_index_stretches_clip(self):
+        from src.visuals_clip import frame_index
+        m = {"frames": 11, "fps": 15}
+        self.assertEqual([frame_index(m, p) for p in (0, 0.5, 1, 2)], [1, 6, 11, 11])
+
+    def test_all_episodes_use_known_visuals(self):
+        from src.common import load_yaml, ROOT
+        from src.visuals import VISUALS
+        for f in (ROOT / "episodes").glob("*.yml"):
+            for sc in load_yaml(f)["scenes"]:
+                self.assertIn(sc["visual"]["type"], VISUALS, f.name)
+
+
 if __name__ == "__main__":
     unittest.main()
