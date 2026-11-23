@@ -136,6 +136,27 @@ def _standin_solar(d, col, clip, sec, u):
             d.ellipse([x - 9, y - 9, x + 9, y + 9], fill=tech)
 
 
+def _standin_battery(d, col, clip, sec, u):
+    """Side view of a cell: anode (left), separator, cathode (right); ions inside, electrons round the outside wire."""
+    bg, ac, tech, txt = col["bg"], col["accent"], col["tech"], col["text"]
+    d.rectangle([160, 700, 500, 1060], fill=_mix(bg, txt, 0.12), outline=txt, width=4)
+    d.rectangle([580, 700, 920, 1060], fill=_mix(bg, txt, 0.45), outline=txt, width=4)
+    d.line([540, 690, 540, 1070], fill=_mix(bg, ac, 0.6), width=6)
+    d.line([330, 700, 330, 560, 750, 560, 750, 700], fill=_mix(bg, ac, 0.5), width=6)
+    direction = -1 if clip == "charge" else 1
+    show_flow = clip in ("discharge", "charge")
+    d.ellipse([540 - 36, 560 - 36, 540 + 36, 560 + 36], fill=_mix(bg, ac, 0.9 if (clip == "discharge") else 0.15))
+    if show_flow:
+        for k in range(8):
+            ph = (sec * 0.25 * direction + k / 8) % 1.0
+            x, y = 220 + 600 * ph, 740 + (k * 83) % 290
+            d.ellipse([x - 10, y - 10, x + 10, y + 10], fill=ac)
+        for k in range(6):
+            ph = (sec * 0.3 * direction + k / 6) % 1.0
+            pts = [(330, 560), (750, 560)]
+            d.ellipse([330 + 420 * ph - 8, 552, 330 + 420 * ph + 8, 568], fill=tech)
+
+
 def draw_render_clip(img, d, vis, scene_t, col, brand, ep, sec=0.0):
     clip = vis["clip"]
     path = clip_dir(ep, clip)
@@ -145,7 +166,7 @@ def draw_render_clip(img, d, vis, scene_t, col, brand, ep, sec=0.0):
         img.paste(_frame(path, frame_index(meta, scene_t)), (0, 0))
         stand = False
     else:
-        {"engine": _standin_engine, "rocket_engine": _standin_rocket_engine, "solar": _standin_solar}.get(vis.get("standin"), _standin)(d, col, clip, sec, scene_t)
+        {"engine": _standin_engine, "rocket_engine": _standin_rocket_engine, "solar": _standin_solar, "battery": _standin_battery}.get(vis.get("standin"), _standin)(d, col, clip, sec, scene_t)
         stand = True
     if vis.get("badge"):
         f = font(28)

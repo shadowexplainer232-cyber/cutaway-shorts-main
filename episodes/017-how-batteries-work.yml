@@ -1,0 +1,119 @@
+# Episode 017: how a lithium-ion battery works (civilian). 3D: blender/aero/battery_cell.py
+# (render on your PC: python -m studio.render_scenes 017 --preview). Without renders a 2D stand-in is drawn.
+id: "017"
+slug: how-batteries-work
+status: draft
+category: Science & Energy
+series: HOW IT ACTUALLY WORKS
+synthetic_media: false
+render: {script: blender/aero/battery_cell.py}
+
+titles:
+  - How Batteries Work (Lithium-Ion Explained)
+  - How Does a Battery Make Electricity? Lithium-Ion Explained
+  - How a Lithium-Ion Battery Works in 50 Seconds
+upload_title_index: 0
+
+description: |
+  Anode, cathode, separator and electrolyte. In under a minute: how a lithium-ion battery turns stored
+  chemical energy into electricity, and how charging reverses it.
+
+  The 3D animation is a simplified schematic, not to scale; ions and electrons are drawn as simple dots.
+
+  Follow Cutaway to understand how the world works.
+hashtags: ["#shorts", "#battery", "#lithiumion", "#engineering", "#howitworks"]
+tags: [how batteries work, lithium ion battery explained, anode cathode, how does a battery work, how charging works]
+pinned_comment: "Should we explain how electric motors work next? Tell us below."
+cover_frame_concept: "Glowing battery cell with ions crossing. Big text: HOW DOES IT WORK?"
+
+# Claims checked against the Argonne National Laboratory page below (read 2026-11-23). Only its statements are used.
+sources_status: UNVERIFIED     # set to VERIFIED yourself after you read the page
+sources:
+  - "Argonne National Laboratory, 'Science 101: Batteries': 'four key parts': the cathode (positive side), the anode (negative side), a separator 'that prevents contact between the cathode and anode', and an electrolyte 'that allows the flow of electrical charge between the cathode and anode'. Discharging: 'positively charged particles of lithium (ions) move through the electrolyte from the anode to the cathode'; the reactions 'generate electrons and convert stored chemical energy in the battery to electrical current'; 'As long as lithium ions shuttle back and forth between the anode and cathode, there is a constant flow of electrons.' Charging: 'the chemical reactions go in reverse: the lithium ions move back from the cathode to the anode.' The cycle 'can be repeated hundreds of times.' https://www.anl.gov/science-101/batteries"
+  - "NOT SOURCED, so NOT in the narration: materials (graphite, metal oxides), voltage, capacity, battery life in years. The 3D model shows no chemistry beyond what is quoted. The energy.gov battery page could not be fetched, so a second source is still worth adding."
+
+next_up: "How Electric Motors Work"
+
+scenes:
+  - id: hook
+    on_screen: ""
+    text: "How does a battery turn stored chemical energy into electricity?"
+    visual: {type: render_clip, clip: hook, standin: battery, badge: "SIMPLIFIED MODEL"}
+    sfx: [{name: whoosh, at: 0.2}]
+
+  - id: parts
+    on_screen: ""
+    text: "A lithium-ion battery has four key parts: a cathode, an anode, a separator, and an electrolyte."
+    visual:
+      type: render_clip
+      clip: parts
+      standin: battery
+      badge: "SIMPLIFIED MODEL"
+      labels:
+        - {text: "ANODE (NEGATIVE)", at: 1.0, until: 4.5, x: 540, y: 1240}
+        - {text: "SEPARATOR KEEPS THEM APART", at: 4.5, until: 7.0, x: 540, y: 1240, size: 32}
+        - {text: "CATHODE (POSITIVE)", at: 7.0, until: 9.5, x: 540, y: 1240}
+    sfx: [{name: valve_click, at: 1.0}]
+
+  - id: discharge
+    on_screen: ""
+    text: "When you use it, lithium ions travel through the electrolyte from the anode to the cathode, and the reactions make electrons flow as current."
+    visual:
+      type: render_clip
+      clip: discharge
+      standin: battery
+      badge: "SIMPLIFIED MODEL"
+      labels:
+        - {text: "IONS: ANODE → CATHODE", at: 1.5, until: 5.5, x: 540, y: 1240}
+        - {text: "ELECTRONS FLOW AS CURRENT", at: 5.5, until: 10.0, x: 540, y: 1240}
+    sfx: [{name: spark_zap, at: 4.5, gain: 0.4}]
+
+  - id: charge
+    on_screen: ""
+    text: "Charging runs the reactions in reverse, so the ions move back to the anode."
+    visual:
+      type: render_clip
+      clip: charge
+      standin: battery
+      badge: "SIMPLIFIED MODEL"
+      labels: [{text: "CHARGING: IONS GO BACK", at: 1.5, until: 7.0, x: 540, y: 1240}]
+    sfx: [{name: ding, at: 2.0, gain: 0.4}]
+
+  - id: lesson
+    on_screen: ""
+    text: "So as long as the ions shuttle back and forth, electrons keep flowing."
+    visual:
+      type: fact_card
+      label: "IN SHORT"
+      lines: ["IONS SHUTTLE", "BACK AND FORTH", "ELECTRONS KEEP FLOWING"]
+      colors: [accent, text, tech]
+      sub: "Argonne National Laboratory"
+    sfx: []
+
+  - id: bonus
+    on_screen: ""
+    text: "Bonus fact: this cycle can be repeated hundreds of times."
+    visual:
+      type: fact_card
+      label: "ONE MORE THING"
+      lines: ["CHARGE AND DISCHARGE", "CAN REPEAT", "HUNDREDS OF TIMES"]
+      colors: [accent, text, tech]
+      sub: "Argonne National Laboratory"
+    sfx: [{name: ding, at: 0.3, gain: 0.5}]
+
+  - id: question
+    on_screen: ""
+    text: "Should we explain how electric motors work next? Tell us in the comments."
+    visual:
+      type: fact_card
+      label: "YOUR TURN"
+      lines: ["ELECTRIC MOTORS", "NEXT?"]
+      colors: [accent, text]
+    pause_after: 1.2
+    sfx: []
+
+  - id: outro
+    on_screen: ""
+    text: "This is Cutaway. Understand how the world works. Follow for the next machine."
+    visual: {type: outro}
+    sfx: [{name: ding, at: 0.3}]

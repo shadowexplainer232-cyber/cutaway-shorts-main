@@ -146,6 +146,13 @@ class Render(unittest.TestCase):
         self.assertEqual(clips, ["hook", "cell", "current", "panel", "home"])
         self.assertTrue((ROOT / script).exists())
 
+    def test_battery_plan(self):
+        from studio import render_scenes as rs
+        from src.common import load_yaml, ROOT
+        script, clips = rs.plan(load_yaml(ROOT / "episodes" / "017-how-batteries-work.yml"))
+        self.assertEqual(clips, ["hook", "parts", "discharge", "charge"])
+        self.assertTrue((ROOT / script).exists())
+
     def test_frame_index_stretches_clip(self):
         from src.visuals_clip import frame_index
         m = {"frames": 11, "fps": 15}
